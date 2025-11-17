@@ -65,16 +65,23 @@ function initAssistant() {
         // Показываем индикатор набора
         const typingIndicator = addTypingIndicator();
 
-        // Имитируем задержку ответа
-        setTimeout(() => {
-            // Убираем индикатор
-            typingIndicator.remove();
-            
-            // Добавляем ответ
-            addMessage('assistant', getAIResponse(message));
-            
-            sendBtn.disabled = false;
-        }, 1500);
+        // Используем настоящий AI вместо имитации
+        getAIResponse(message)
+            .then(aiResponse => {
+                // Убираем индикатор
+                typingIndicator.remove();
+                // Добавляем ответ от AI
+                addMessage('assistant', aiResponse);
+            })
+            .catch(error => {
+                // Убираем индикатор
+                typingIndicator.remove();
+                // Добавляем сообщение об ошибке
+                addMessage('assistant', `Ошибка: ${error.message}. Попробуйте еще раз.`);
+            })
+            .finally(() => {
+                sendBtn.disabled = false;
+            });
     });
     
     // Отправка сообщения по Enter
@@ -113,31 +120,30 @@ function initAssistant() {
         return indicator;
     }
 
-    // Функция "AI" ответа
-async function getAIResponse(message) {
-    try {
-        const response = await fetch('/.netlify/functions/ai-assistant', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ message })
-        });
+    // Функция AI ответа с исправленным try/catch
+    async function getAIResponse(message) {
+        try {
+            const response = await fetch('/.netlify/functions/ai-assistant', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ message })
+            });
 
-        if (!response.ok) {
-            throw new Error(`Network error: ${response.status}`);
+            if (!response.ok) {
+                throw new Error(`Network error: ${response.status}`);
+            }
+
+            const data = await response.json();
+            
+            if (data.error) {
+                throw new Error(data.error);
+            }
+
+            return data.response;
+        } catch (error) {
+            console.error('Error:', error);
+            throw error; // Пробрасываем ошибку дальше
         }
-
-        const data = await response.json();
-        
-        if (data.error) {
-            throw new Error(data.error);
-        }
-
-        return data.response;
-    } catch (error) {
-        console.error('Error:', error);
-        return `Ошибка: ${error.message}. Попробуйте еще раз.`;
     }
 }
 
@@ -193,4 +199,4 @@ document.addEventListener('DOMContentLoaded', function() {
     initLessonNavigation();
     
     console.log('✅ Все системы запущены!');
-})};
+});

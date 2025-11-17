@@ -1,43 +1,19 @@
 const fetch = require('node-fetch');
 
 exports.handler = async (event) => {
-  // Разрешаем CORS
   const headers = {
     'Access-Control-Allow-Origin': '*',
     'Access-Control-Allow-Headers': 'Content-Type',
     'Access-Control-Allow-Methods': 'POST, OPTIONS'
   };
 
-  // Обработка предварительного запроса OPTIONS
   if (event.httpMethod === 'OPTIONS') {
-    return {
-      statusCode: 200,
-      headers,
-      body: ''
-    };
-  }
-
-  // Только POST запросы
-  if (event.httpMethod !== 'POST') {
-    return {
-      statusCode: 405,
-      headers,
-      body: JSON.stringify({ error: 'Method not allowed' })
-    };
+    return { statusCode: 200, headers, body: '' };
   }
 
   try {
     const { message } = JSON.parse(event.body);
 
-    if (!message) {
-      return {
-        statusCode: 400,
-        headers,
-        body: JSON.stringify({ error: 'Message is required' })
-      };
-    }
-
-    // Вызов Hugging Face API
     const response = await fetch(
       'https://api-inference.huggingface.co/models/deepseek-ai/DeepSeek-Coder-6.7B-Instruct',
       {
@@ -57,13 +33,8 @@ exports.handler = async (event) => {
       }
     );
 
-    if (!response.ok) {
-      throw new Error(`Hugging Face API error: ${response.status}`);
-    }
-
     const data = await response.json();
-
-    // Обработка ответа от Hugging Face
+    
     if (data && data[0] && data[0].generated_text) {
       return {
         statusCode: 200,
@@ -71,10 +42,9 @@ exports.handler = async (event) => {
         body: JSON.stringify({ response: data[0].generated_text })
       };
     } else {
-      throw new Error('Invalid response format from Hugging Face');
+      throw new Error('Invalid response from AI');
     }
   } catch (error) {
-    console.error('Error:', error);
     return {
       statusCode: 500,
       headers,
