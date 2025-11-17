@@ -120,7 +120,7 @@ function initAssistant() {
         return indicator;
     }
 
-    // Функция AI ответа с исправленным try/catch
+    // Функция AI ответа
     async function getAIResponse(message) {
         try {
             const response = await fetch('/.netlify/functions/ai-assistant', {
@@ -142,7 +142,7 @@ function initAssistant() {
             return data.response;
         } catch (error) {
             console.error('Error:', error);
-            throw error; // Пробрасываем ошибку дальше
+            throw error;
         }
     }
 }
