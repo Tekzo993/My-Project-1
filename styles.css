@@ -1182,7 +1182,7 @@ body {
     padding: 25px;
     height: fit-content;
     position: sticky;
-    top: 120px;
+    top: 140px; /* Увеличиваем отступ чтобы не перекрывать кнопку "Назад" */
 }
 
 .lesson-nav-dynamic h3 {

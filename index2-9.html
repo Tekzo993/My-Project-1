@@ -3,66 +3,152 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Шаблоны - C++ Navigator</title>
+    <title>Шаблоны - C++ PRO</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <header class="header">
-        <div class="container header-inner">
-            <img src="favicon.ico" alt="C++ Logo" class="logo">
-            <nav class="nav">
-                <a href="index.html" class="nav-btn active">Теория C++</a>
-                <a href="index.html" class="nav-btn">Поиск по операторам</a>
-                <a href="index.html" class="nav-btn">Ассистент</a>
-                <a href="index.html" class="nav-btn">Памятки</a>
-            </nav>
-            <div class="right">
-                <button class="auth">Авторизоваться</button>
-                <div class="chat">⚙️</div>
+    <!-- Навигация -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">C++ PRO</div>
+            <ul class="nav-links">
+                <li><a href="index.html" class="nav-link">Курсы</a></li>
+                <li><a href="index.html" class="nav-link">Поиск</a></li>
+                <li><a href="index.html" class="nav-link">Ассистент</a></li>
+                <li><a href="index.html" class="nav-link">Памятки</a></li>
+            </ul>
+            <div class="nav-right">
+                <div class="nav-icon">⚙️</div>
             </div>
         </div>
-    </header>
+    </nav>
 
+    <!-- Основной контент -->
     <main class="container">
-        <div class="content">
-            <aside>
-                <div class="block1">
+        <!-- Кнопка Назад повыше -->
+        <div class="back-top-container">
+            <a href="index.html" class="back-top-btn">
+                <span class="back-arrow">←</span>
+                Назад к теории
+            </a>
+        </div>
 
-                    <a href="index.html" class="back-btn">← Назад к теории</a>
-                        <h2>Шаблоны</h2>
-                        <div class="content-block2">
-                            <div class="title">Шаблоны функции</div>
-                        </div>
-                        <div class="content-block2">
-                            <div class="title">Шаблон класса</div>
-                        </div>
-                        <div class="content-block2">
-                            <div class="title">Специализация шаблона</div>
-                        </div>
-                        <div class="content-block2">
-                            <div class="title">Наследование и шаблоны классов</div>
-                        </div>                                                
+        <div class="lesson-container-dynamic">
+            <!-- Боковая панель навигации -->
+            <aside class="lesson-sidebar-dynamic">
+                <div class="lesson-nav-dynamic">
+                    <h3>Содержание урока</h3>
+                    
+                    <!-- Каждый пункт с кнопкой перехода -->
+                    <div class="lesson-nav-item-dynamic" data-lesson="function-templates">
+                        <span class="nav-number-dynamic">1</span>
+                        <span class="nav-title-dynamic">Шаблоны функций</span>
+                        <button class="open-lesson-btn-dynamic">Открыть</button>
                     </div>
-                        <div class="content-block2">
-                            <div class="title">Оператор</div>
-                        </div>
-                        <div class="content-block2">
-                            <div class="title">Концепты</div>
-                        </div> 
-                        <div class="content-block2">
-                            <div class="title">Выражение requires</div>
-                        </div>
-                        <div class="content-block2">
-                            <div class="title">Ограничения типа для auto</div>
-                        </div>                                                 
+                    
+                    <div class="lesson-nav-item-dynamic" data-lesson="class-templates">
+                        <span class="nav-number-dynamic">2</span>
+                        <span class="nav-title-dynamic">Шаблоны классов</span>
+                        <button class="open-lesson-btn-dynamic">Открыть</button>
                     </div>
-                        
-
-                        </ol>
+                    
+                    <div class="lesson-nav-item-dynamic" data-lesson="template-specialization">
+                        <span class="nav-number-dynamic">3</span>
+                        <span class="nav-title-dynamic">Специализация шаблонов</span>
+                        <button class="open-lesson-btn-dynamic">Открыть</button>
+                    </div>
+                    
+                    <div class="lesson-nav-item-dynamic" data-lesson="inheritance-templates">
+                        <span class="nav-number-dynamic">4</span>
+                        <span class="nav-title-dynamic">Наследование и шаблоны классов</span>
+                        <button class="open-lesson-btn-dynamic">Открыть</button>
+                    </div>
+                    
+                    <div class="lesson-nav-item-dynamic" data-lesson="operator-templates">
+                        <span class="nav-number-dynamic">5</span>
+                        <span class="nav-title-dynamic">Шаблоны операторов</span>
+                        <button class="open-lesson-btn-dynamic">Открыть</button>
+                    </div>
+                    
+                    <div class="lesson-nav-item-dynamic" data-lesson="concepts">
+                        <span class="nav-number-dynamic">6</span>
+                        <span class="nav-title-dynamic">Концепты</span>
+                        <button class="open-lesson-btn-dynamic">Открыть</button>
+                    </div>
+                    
+                    <div class="lesson-nav-item-dynamic" data-lesson="requires-expression">
+                        <span class="nav-number-dynamic">7</span>
+                        <span class="nav-title-dynamic">Выражение requires</span>
+                        <button class="open-lesson-btn-dynamic">Открыть</button>
+                    </div>
+                    
+                    <div class="lesson-nav-item-dynamic" data-lesson="auto-constraints">
+                        <span class="nav-number-dynamic">8</span>
+                        <span class="nav-title-dynamic">Ограничения типа для auto</span>
+                        <button class="open-lesson-btn-dynamic">Открыть</button>
                     </div>
                 </div>
             </aside>
+
+            <!-- Основной контент урока -->
+            <section class="lesson-content-dynamic" id="lessonContent">
+                <!-- Контент будет загружаться сюда динамически -->
+                <div class="welcome-message">
+                    <h2>👋 Добро пожаловать в урок по шаблонам!</h2>
+                    <p>Выберите тему из списка слева, чтобы начать изучение шаблонов в C++.</p>
+                </div>
+            </section>
         </div>
     </main>
+
+    <script>
+        // База данных будет заполнена позже
+        const lessonsDatabase = {};
+
+        // Обработка кликов по кнопкам "Открыть"
+        document.addEventListener('DOMContentLoaded', function() {
+            const openButtons = document.querySelectorAll('.open-lesson-btn-dynamic');
+            const lessonContent = document.getElementById('lessonContent');
+            
+            openButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const lessonItem = this.closest('.lesson-nav-item-dynamic');
+                    const lessonId = lessonItem.getAttribute('data-lesson');
+                    const lessonTitle = lessonItem.querySelector('.nav-title-dynamic').textContent;
+                    
+                    // Показываем заглушку
+                    showLessonContent(lessonId, lessonTitle);
+                    
+                    // Подсвечиваем активный элемент
+                    document.querySelectorAll('.lesson-nav-item-dynamic').forEach(item => {
+                        item.classList.remove('active');
+                    });
+                    lessonItem.classList.add('active');
+                });
+            });
+
+            // Функция показа контента урока
+            function showLessonContent(lessonId, lessonTitle) {
+                lessonContent.innerHTML = `
+                    <div class="lesson-detail-content">
+                        <h1>${lessonTitle}</h1>
+                        <p>Контент для этого урока будет добавлен в ближайшее время.</p>
+                        <div class="code-block">
+                            <code>// Контент скоро появится</code>
+                        </div>
+                    </div>
+                `;
+            }
+
+            // Автоматически открываем первый урок
+            const firstLesson = document.querySelector('.lesson-nav-item-dynamic');
+            if (firstLesson) {
+                firstLesson.classList.add('active');
+                const firstLessonId = firstLesson.getAttribute('data-lesson');
+                const firstLessonTitle = firstLesson.querySelector('.nav-title-dynamic').textContent;
+                showLessonContent(firstLessonId, firstLessonTitle);
+            }
+        });
+    </script>
 </body>
 </html>
