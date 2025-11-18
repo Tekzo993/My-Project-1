@@ -61,7 +61,7 @@
                 <div class="welcome-message">
                     <h2>👋 Добро пожаловать!</h2>
                     <p>Выберите тему из списка слева, чтобы начать изучение.</p>
-                    <p>Весь контент загружается динамически без перезагрузки страницы.</p>
+                    <p>Контент загружается из Firebase...</p>
                 </div>
             </section>
         </div>
@@ -84,48 +84,47 @@
                 if (lessonDoc.exists()) {
                     const lessons = lessonDoc.data().items;
                     
-                    // Сохраняем контент в глобальную переменную
-                    lessons.forEach(lesson => {
-                        if (lesson.id === "lesson-1") {
-                            firebaseLessonsContent = {
-                                'what-is-cpp': {
-                                    title: 'Что такое C++?',
-                                    content: lesson.content // Контент из Firebase
-                                },
-                                'first-program': {
-                                    title: 'Первая программа в Visual Studio', 
-                                    content: lesson.content // Контент из Firebase
-                                }
-                            };
+                    // Ищем урок с id "lesson-1"
+                    const lesson1 = lessons.find(lesson => lesson.id === "lesson-1");
+                    
+                    if (lesson1) {
+                        firebaseLessonsContent = {
+                            'what-is-cpp': {
+                                title: 'Что такое C++?',
+                                content: lesson1.content
+                            },
+                            'first-program': {
+                                title: 'Первая программа в Visual Studio', 
+                                content: lesson1.content
+                            }
+                        };
+                        
+                        console.log('✅ Контент загружен из Firebase!');
+                        
+                        // Автоматически открываем первый урок
+                        const firstLesson = document.querySelector('.lesson-nav-item-dynamic');
+                        if (firstLesson) {
+                            firstLesson.classList.add('active');
+                            const firstLessonId = firstLesson.getAttribute('data-lesson');
+                            showLessonContent(firstLessonId);
                         }
-                    });
-                    
-                    console.log('✅ Контент загружен из Firebase!');
-                    
-                    // Автоматически открываем первый урок после загрузки
-                    const firstLesson = document.querySelector('.lesson-nav-item-dynamic');
-                    if (firstLesson) {
-                        firstLesson.classList.add('active');
-                        const firstLessonId = firstLesson.getAttribute('data-lesson');
-                        const firstLessonTitle = firstLesson.querySelector('.nav-title-dynamic').textContent;
-                        showLessonContent(firstLessonId, firstLessonTitle);
+                    } else {
+                        showError('Урок lesson-1 не найден в Firebase');
                     }
                 } else {
-                    console.log('📝 В Firebase нет данных, используем локальный контент');
-                    showFallbackContent();
+                    showError('Документ beginner не найден в Firebase');
                 }
                 
             } catch (error) {
                 console.error('❌ Ошибка загрузки из Firebase:', error);
-                showFallbackContent();
+                showError('Ошибка подключения к Firebase');
             }
         }
 
         // Функция показа контента урока
-        function showLessonContent(lessonId, lessonTitle) {
+        function showLessonContent(lessonId) {
             const lessonContent = document.getElementById('lessonContent');
             
-            // Проверяем есть ли урок в Firebase
             if (firebaseLessonsContent[lessonId]) {
                 const lesson = firebaseLessonsContent[lessonId];
                 lessonContent.innerHTML = `
@@ -134,52 +133,20 @@
                     </div>
                 `;
             } else {
-                // Если урока нет в Firebase (заглушка)
-                lessonContent.innerHTML = `
-                    <div class="lesson-detail-content">
-                        <h1>${lessonTitle}</h1>
-                        <p>Контент для этого урока загружается из Firebase...</p>
-                        <div class="loading">Загрузка...</div>
-                    </div>
-                `;
+                showError('Контент урока не загружен');
             }
         }
 
-        // Fallback контент если Firebase не работает
-        function showFallbackContent() {
-            const fallbackContent = {
-                'what-is-cpp': {
-                    title: 'Что такое C++?',
-                    content: `
-                        <h1>Что такое C++?</h1>
-                        <div class="text-content">
-                            <p><strong>C++</strong> - это мощный язык программирования общего назначения, который был создан как расширение языка C.</p>
-                            <p>Контент временно недоступен. Данные загружаются из Firebase.</p>
-                        </div>
-                    `
-                },
-                'first-program': {
-                    title: 'Первая программа в Visual Studio',
-                    content: `
-                        <h1>Первая программа в Visual Studio</h1>
-                        <div class="text-content">
-                            <p>Создание первой программы в Visual Studio...</p>
-                            <p>Контент временно недоступен. Данные загружаются из Firebase.</p>
-                        </div>
-                    `
-                }
-            };
-            
-            firebaseLessonsContent = fallbackContent;
-            
-            // Открываем первый урок
-            const firstLesson = document.querySelector('.lesson-nav-item-dynamic');
-            if (firstLesson) {
-                firstLesson.classList.add('active');
-                const firstLessonId = firstLesson.getAttribute('data-lesson');
-                const firstLessonTitle = firstLesson.querySelector('.nav-title-dynamic').textContent;
-                showLessonContent(firstLessonId, firstLessonTitle);
-            }
+        // Показ ошибки
+        function showError(message) {
+            const lessonContent = document.getElementById('lessonContent');
+            lessonContent.innerHTML = `
+                <div class="lesson-detail-content">
+                    <h2>❌ Ошибка загрузки</h2>
+                    <p>${message}</p>
+                    <p>Проверьте подключение к интернету и настройки Firebase.</p>
+                </div>
+            `;
         }
 
         // Обработка кликов по кнопкам "Открыть"
@@ -190,10 +157,9 @@
                 button.addEventListener('click', function() {
                     const lessonItem = this.closest('.lesson-nav-item-dynamic');
                     const lessonId = lessonItem.getAttribute('data-lesson');
-                    const lessonTitle = lessonItem.querySelector('.nav-title-dynamic').textContent;
                     
                     // Показываем контент урока
-                    showLessonContent(lessonId, lessonTitle);
+                    showLessonContent(lessonId);
                     
                     // Подсвечиваем активный элемент
                     document.querySelectorAll('.lesson-nav-item-dynamic').forEach(item => {
