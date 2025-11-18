@@ -3,101 +3,257 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Основы языка - C++ Navigator</title>
+    <title>C++ PRO - Основы языка</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <header class="header">
-        <div class="container header-inner">
-            <img src="favicon.ico" alt="C++ Logo" class="logo">
-            <nav class="nav">
-                <a href="index.html" class="nav-btn active">Теория C++</a>
-                <a href="index.html" class="nav-btn">Поиск по операторам</a>
-                <a href="index.html" class="nav-btn">Ассистент</a>
-                <a href="index.html" class="nav-btn">Памятки</a>
-            </nav>
-            <div class="right">
-                <button class="auth">Авторизоваться</button>
-                <div class="chat">⚙️</div>
+    <!-- Навигация -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">C++ PRO</div>
+            <ul class="nav-links">
+                <li><a href="index.html" class="nav-link">Курсы</a></li>
+                <li><a href="index.html" class="nav-link">Поиск</a></li>
+                <li><a href="index.html" class="nav-link">Ассистент</a></li>
+                <li><a href="index.html" class="nav-link">Памятки</a></li>
+            </ul>
+            <div class="nav-right">
+                <div class="nav-icon">⚙️</div>
             </div>
         </div>
-    </header>
+    </nav>
 
+    <!-- Основной контент -->
     <main class="container">
-        <div class="content">
-            <aside>
-                <div class="block1">
+        <!-- Кнопка Назад повыше -->
+        <div class="back-top-container">
+            <a href="index.html" class="back-top-btn">
+                <span class="back-arrow">←</span>
+                Назад к теории
+            </a>
+        </div>
 
-                    <a href="index.html" class="back-btn">← Назад к теории</a>
-                        <h2>?</h2>
-                        <div class="content-block2">
-                            <div class="title">Структура программы</div>
-                        </div>
-                        
-                        <div class="content-block2">
-                            <div class="title">Переменные</div>
-                        </div>
-                        <div class="content-block2">
-                            <div class="title">Типы данных</div>
-                        </div>
-                        
-                        <div class="content-block2">
-                            <div class="title">Константы</div>
-                        </div>
-                        <div class="content-block2">
-                            <div class="title">Консольный ввод и ввода-вывод</div>
-                        </div>
-                        
-                        <div class="content-block2">
-                            <div class="title">using. Подключение пространств имен и определение псевдонима</div>
-                        </div>
-                        <div class="content-block2">
-                            <div class="title">Арифметические операции</div>
-                        </div>
-                        
-                        <div class="content-block2">
-                            <div class="title">Статическая типизация и преобразование типов</div>
-                        </div>
-                        <div class="content-block2">
-                            <div class="title">Операции присваивания</div>
-                        </div>
-                        
-                        <div class="content-block2">
-                            <div class="title">Условные Выражения</div>
-                        </div>
-                        <div class="content-block2">
-                            <div class="title">Конструкция if-else и теральный оператор</div>
-                        </div>
-                        <div class="content-block2">
-                            <div class="title">Конструкция switch-case</div>
-                        </div>
-                        
-                        <div class="content-block2">
-                            <div class="title">Циклы</div>
-                        </div><div class="content-block2">
-                            <div class="title">Ссылки</div>
-                        </div>
-                        <div class="content-block2">
-                            <div class="title">Массивы</div>
-                        </div>
-                        <div class="content-block2">
-                            <div class="title">Многомерные массивы</div>
-                        </div>
-                        
-                        <div class="content-block2">
-                            <div class="title">Массивы символов</div>
-                        </div>
-                        <div class="content-block2">
-                            <div class="title">Введение в строки</div>
-                        </div>                                      
+        <div class="lesson-container-dynamic">
+            <!-- Боковая панель навигации -->
+            <aside class="lesson-sidebar-dynamic">
+                <div class="lesson-nav-dynamic">
+                    <h3>Содержание урока</h3>
+                    
+                    <!-- Каждый пункт с кнопкой перехода -->
+                    <div class="lesson-nav-item-dynamic" data-lesson="structure">
+                        <span class="nav-number-dynamic">1</span>
+                        <span class="nav-title-dynamic">Структура программы</span>
+                        <button class="open-lesson-btn-dynamic">Открыть</button>
                     </div>
-                        
-
-                        </ol>
+                    
+                    <div class="lesson-nav-item-dynamic" data-lesson="variables">
+                        <span class="nav-number-dynamic">2</span>
+                        <span class="nav-title-dynamic">Переменные</span>
+                        <button class="open-lesson-btn-dynamic">Открыть</button>
+                    </div>
+                    
+                    <div class="lesson-nav-item-dynamic" data-lesson="data-types">
+                        <span class="nav-number-dynamic">3</span>
+                        <span class="nav-title-dynamic">Типы данных</span>
+                        <button class="open-lesson-btn-dynamic">Открыть</button>
+                    </div>
+                    
+                    <div class="lesson-nav-item-dynamic" data-lesson="constants">
+                        <span class="nav-number-dynamic">4</span>
+                        <span class="nav-title-dynamic">Константы</span>
+                        <button class="open-lesson-btn-dynamic">Открыть</button>
+                    </div>
+                    
+                    <div class="lesson-nav-item-dynamic" data-lesson="io">
+                        <span class="nav-number-dynamic">5</span>
+                        <span class="nav-title-dynamic">Консольный ввод-вывод</span>
+                        <button class="open-lesson-btn-dynamic">Открыть</button>
+                    </div>
+                    
+                    <div class="lesson-nav-item-dynamic" data-lesson="namespaces">
+                        <span class="nav-number-dynamic">6</span>
+                        <span class="nav-title-dynamic">using. Пространства имен</span>
+                        <button class="open-lesson-btn-dynamic">Открыть</button>
+                    </div>
+                    
+                    <div class="lesson-nav-item-dynamic" data-lesson="arithmetic">
+                        <span class="nav-number-dynamic">7</span>
+                        <span class="nav-title-dynamic">Арифметические операции</span>
+                        <button class="open-lesson-btn-dynamic">Открыть</button>
+                    </div>
+                    
+                    <div class="lesson-nav-item-dynamic" data-lesson="typing">
+                        <span class="nav-number-dynamic">8</span>
+                        <span class="nav-title-dynamic">Статическая типизация</span>
+                        <button class="open-lesson-btn-dynamic">Открыть</button>
+                    </div>
+                    
+                    <div class="lesson-nav-item-dynamic" data-lesson="assignment">
+                        <span class="nav-number-dynamic">9</span>
+                        <span class="nav-title-dynamic">Операции присваивания</span>
+                        <button class="open-lesson-btn-dynamic">Открыть</button>
+                    </div>
+                    
+                    <div class="lesson-nav-item-dynamic" data-lesson="conditions">
+                        <span class="nav-number-dynamic">10</span>
+                        <span class="nav-title-dynamic">Условные Выражения</span>
+                        <button class="open-lesson-btn-dynamic">Открыть</button>
+                    </div>
+                    
+                    <div class="lesson-nav-item-dynamic" data-lesson="if-else">
+                        <span class="nav-number-dynamic">11</span>
+                        <span class="nav-title-dynamic">Конструкция if-else</span>
+                        <button class="open-lesson-btn-dynamic">Открыть</button>
+                    </div>
+                    
+                    <div class="lesson-nav-item-dynamic" data-lesson="switch-case">
+                        <span class="nav-number-dynamic">12</span>
+                        <span class="nav-title-dynamic">Конструкция switch-case</span>
+                        <button class="open-lesson-btn-dynamic">Открыть</button>
+                    </div>
+                    
+                    <div class="lesson-nav-item-dynamic" data-lesson="loops">
+                        <span class="nav-number-dynamic">13</span>
+                        <span class="nav-title-dynamic">Циклы</span>
+                        <button class="open-lesson-btn-dynamic">Открыть</button>
+                    </div>
+                    
+                    <div class="lesson-nav-item-dynamic" data-lesson="references">
+                        <span class="nav-number-dynamic">14</span>
+                        <span class="nav-title-dynamic">Ссылки</span>
+                        <button class="open-lesson-btn-dynamic">Открыть</button>
+                    </div>
+                    
+                    <div class="lesson-nav-item-dynamic" data-lesson="arrays">
+                        <span class="nav-number-dynamic">15</span>
+                        <span class="nav-title-dynamic">Массивы</span>
+                        <button class="open-lesson-btn-dynamic">Открыть</button>
+                    </div>
+                    
+                    <div class="lesson-nav-item-dynamic" data-lesson="multiarrays">
+                        <span class="nav-number-dynamic">16</span>
+                        <span class="nav-title-dynamic">Многомерные массивы</span>
+                        <button class="open-lesson-btn-dynamic">Открыть</button>
+                    </div>
+                    
+                    <div class="lesson-nav-item-dynamic" data-lesson="char-arrays">
+                        <span class="nav-number-dynamic">17</span>
+                        <span class="nav-title-dynamic">Массивы символов</span>
+                        <button class="open-lesson-btn-dynamic">Открыть</button>
+                    </div>
+                    
+                    <div class="lesson-nav-item-dynamic" data-lesson="strings">
+                        <span class="nav-number-dynamic">18</span>
+                        <span class="nav-title-dynamic">Введение в строки</span>
+                        <button class="open-lesson-btn-dynamic">Открыть</button>
                     </div>
                 </div>
             </aside>
+
+            <!-- Основной контент урока -->
+            <section class="lesson-content-dynamic" id="lessonContent">
+                <!-- Контент будет загружаться сюда динамически -->
+                <div class="welcome-message">
+                    <h2>👋 Добро пожаловать!</h2>
+                    <p>Выберите тему из списка слева, чтобы начать изучение.</p>
+                    <p>Весь контент загружается динамически без перезагрузки страницы.</p>
+                </div>
+            </section>
         </div>
     </main>
+
+    <script>
+        // База данных с контентом уроков (в будущем заменится на Firebase)
+        const lessonsDatabase = {
+            'structure': {
+                title: 'Структура программы',
+                content: `
+                    <h1>Структура программы на C++</h1>
+                    <p>Каждая программа на C++ состоит из основных элементов...</p>
+                    <div class="code-block">
+                        <code>#include &lt;iostream&gt;\n\nint main() {\n    std::cout << "Hello World!";\n    return 0;\n}</code>
+                    </div>
+                `
+            },
+            'variables': {
+                title: 'Переменные',
+                content: `
+                    <h1>Переменные в C++</h1>
+                    <p>Переменные используются для хранения данных в программе...</p>
+                    <div class="code-block">
+                        <code>int age = 25;\ndouble price = 19.99;\nchar grade = 'A';</code>
+                    </div>
+                `
+            },
+            'data-types': {
+                title: 'Типы данных',
+                content: `
+                    <h1>Типы данных в C++</h1>
+                    <p>C++ поддерживает различные типы данных для разных целей...</p>
+                `
+            }
+            // Добавь остальные уроки по аналогии...
+        };
+
+        // Обработка кликов по кнопкам "Открыть"
+        document.addEventListener('DOMContentLoaded', function() {
+            const openButtons = document.querySelectorAll('.open-lesson-btn-dynamic');
+            const lessonContent = document.getElementById('lessonContent');
+            
+            openButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const lessonItem = this.closest('.lesson-nav-item-dynamic');
+                    const lessonId = lessonItem.getAttribute('data-lesson');
+                    const lessonTitle = lessonItem.querySelector('.nav-title-dynamic').textContent;
+                    
+                    // Показываем контент урока
+                    showLessonContent(lessonId, lessonTitle);
+                    
+                    // Подсвечиваем активный элемент
+                    document.querySelectorAll('.lesson-nav-item-dynamic').forEach(item => {
+                        item.classList.remove('active');
+                    });
+                    lessonItem.classList.add('active');
+                });
+            });
+
+            // Функция показа контента урока
+            function showLessonContent(lessonId, lessonTitle) {
+                // Проверяем есть ли урок в базе
+                if (lessonsDatabase[lessonId]) {
+                    const lesson = lessonsDatabase[lessonId];
+                    lessonContent.innerHTML = `
+                        <div class="lesson-detail-content">
+                            ${lesson.content}
+                            <div class="lesson-meta">
+                                <small>Урок загружен из базы данных</small>
+                            </div>
+                        </div>
+                    `;
+                } else {
+                    // Если урока нет в базе (заглушка)
+                    lessonContent.innerHTML = `
+                        <div class="lesson-detail-content">
+                            <h1>${lessonTitle}</h1>
+                            <p>Контент для этого урока пока не добавлен в базу данных.</p>
+                            <p>ID урока: <strong>${lessonId}</strong></p>
+                            <div class="code-block">
+                                <code>// Скоро здесь появится контент\n// Из Firebase базы данных</code>
+                            </div>
+                        </div>
+                    `;
+                }
+            }
+
+            // Автоматически открываем первый урок
+            const firstLesson = document.querySelector('.lesson-nav-item-dynamic');
+            if (firstLesson) {
+                firstLesson.classList.add('active');
+                const firstLessonId = firstLesson.getAttribute('data-lesson');
+                const firstLessonTitle = firstLesson.querySelector('.nav-title-dynamic').textContent;
+                showLessonContent(firstLessonId, firstLessonTitle);
+            }
+        });
+    </script>
 </body>
 </html>

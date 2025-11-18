@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Первые шаги - C++ PRO</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Навигация -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">C++ PRO</div>
+            <ul class="nav-links">
+                <li><a href="index.html" class="nav-link">Курсы</a></li>
+                <li><a href="index.html" class="nav-link">Поиск</a></li>
+                <li><a href="index.html" class="nav-link">Ассистент</a></li>
+                <li><a href="index.html" class="nav-link">Памятки</a></li>
+            </ul>
+            <div class="nav-right">
+                <div class="nav-icon">⚙️</div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Основной контент -->
+    <main class="container">
+        <!-- Кнопка Назад повыше -->
+        <div class="back-top-container">
+            <a href="index.html" class="back-top-btn">
+                <span class="back-arrow">←</span>
+                Назад к теории
+            </a>
+        </div>
+
+        <div class="lesson-container-dynamic">
+            <!-- Боковая панель навигации -->
+            <aside class="lesson-sidebar-dynamic">
+                <div class="lesson-nav-dynamic">
+                    <h3>Содержание урока</h3>
+                    
+                    <!-- 2 урока -->
+                    <div class="lesson-nav-item-dynamic" data-lesson="what-is-cpp">
+                        <span class="nav-number-dynamic">1</span>
+                        <span class="nav-title-dynamic">Что такое C++?</span>
+                        <button class="open-lesson-btn-dynamic">Открыть</button>
+                    </div>
+                    
+                    <div class="lesson-nav-item-dynamic" data-lesson="first-program">
+                        <span class="nav-number-dynamic">2</span>
+                        <span class="nav-title-dynamic">Первая программа в Visual Studio</span>
+                        <button class="open-lesson-btn-dynamic">Открыть</button>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Основной контент урока -->
+            <section class="lesson-content-dynamic" id="lessonContent">
+                <!-- Контент будет загружаться сюда динамически -->
+                <div class="welcome-message">
+                    <h2>👋 Добро пожаловать!</h2>
+                    <p>Выберите тему из списка слева, чтобы начать изучение.</p>
+                    <p>Весь контент загружается динамически без перезагрузки страницы.</p>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <script>
+        // База данных с контентом уроков
+        const lessonsDatabase = {
+            'what-is-cpp': {
+                title: 'Что такое C++?',
+                content: `
+                    <h1>Что такое C++?</h1>
+                    <div class="text-content">
+                        <p><strong>C++</strong> - это мощный язык программирования общего назначения, который был создан как расширение языка C.</p>
+                        
+                        <div class="content-block2">
+                            <div class="title">Язык программирования C++</div>
+                            <p>Подробное описание языка программирования C++ будет здесь...</p>
+                        </div>
+                    </div>
+                `
+            },
+            'first-program': {
+                title: 'Первая программа в Visual Studio',
+                content: `
+                    <h1>Первая программа в Visual Studio</h1>
+                    <div class="text-content">
+                        <p>Создание первой программы в Visual Studio...</p>
+                        
+                        <div class="content-block2">
+                            <div class="title">Первая программа в Visual Studio</div>
+                            <p>Инструкция по созданию первой программы будет здесь...</p>
+                        </div>
+                    </div>
+                `
+            }
+        };
+
+        // Обработка кликов по кнопкам "Открыть"
+        document.addEventListener('DOMContentLoaded', function() {
+            const openButtons = document.querySelectorAll('.open-lesson-btn-dynamic');
+            const lessonContent = document.getElementById('lessonContent');
+            
+            openButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const lessonItem = this.closest('.lesson-nav-item-dynamic');
+                    const lessonId = lessonItem.getAttribute('data-lesson');
+                    const lessonTitle = lessonItem.querySelector('.nav-title-dynamic').textContent;
+                    
+                    // Показываем контент урока
+                    showLessonContent(lessonId, lessonTitle);
+                    
+                    // Подсвечиваем активный элемент
+                    document.querySelectorAll('.lesson-nav-item-dynamic').forEach(item => {
+                        item.classList.remove('active');
+                    });
+                    lessonItem.classList.add('active');
+                });
+            });
+
+            // Функция показа контента урока
+            function showLessonContent(lessonId, lessonTitle) {
+                // Проверяем есть ли урок в базе
+                if (lessonsDatabase[lessonId]) {
+                    const lesson = lessonsDatabase[lessonId];
+                    lessonContent.innerHTML = `
+                        <div class="lesson-detail-content">
+                            ${lesson.content}
+                        </div>
+                    `;
+                } else {
+                    // Если урока нет в базе (заглушка)
+                    lessonContent.innerHTML = `
+                        <div class="lesson-detail-content">
+                            <h1>${lessonTitle}</h1>
+                            <p>Контент для этого урока пока не добавлен в базу данных.</p>
+                        </div>
+                    `;
+                }
+            }
+
+            // Автоматически открываем первый урок
+            const firstLesson = document.querySelector('.lesson-nav-item-dynamic');
+            if (firstLesson) {
+                firstLesson.classList.add('active');
+                const firstLessonId = firstLesson.getAttribute('data-lesson');
+                const firstLessonTitle = firstLesson.querySelector('.nav-title-dynamic').textContent;
+                showLessonContent(firstLessonId, firstLessonTitle);
+            }
+        });
+    </script>
+</body>
+</html>

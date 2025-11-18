@@ -283,6 +283,67 @@ body {
     font-weight: bold;
 }
 
+/* Стили для справочника */
+.reference-section {
+    background: #161b22;
+    border: 1px solid #30363d;
+    border-radius: 10px;
+    padding: 25px;
+    margin-bottom: 30px;
+}
+
+.reference-section h3 {
+    color: #00d8ff;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.reference-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+}
+
+.reference-category h4 {
+    color: #ff6b00;
+    margin-bottom: 15px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #30363d;
+}
+
+.reference-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.reference-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 12px;
+    background: #0d1117;
+    border: 1px solid #30363d;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+}
+
+.reference-item:hover {
+    background: #1c2128;
+    border-color: #00d8ff;
+}
+
+.reference-item code {
+    background: #000;
+    color: #00d8ff;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-weight: bold;
+    min-width: 80px;
+    display: inline-block;
+    text-align: center;
+}
+
 .search-results {
     background: #161b22;
     padding: 30px;
@@ -466,6 +527,14 @@ body {
     .course-card {
         padding: 20px;
     }
+
+    .reference-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .reference-section {
+        padding: 20px;
+    }
 }
 
 @media (max-width: 480px) {
@@ -590,4 +659,686 @@ body {
     background: #00d8ff;
     color: #000000;
 }
-/* 718 */
+
+/* Стили для страниц уроков */
+.lesson-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 40px;
+    padding: 120px 20px 80px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.lesson-sidebar {
+    display: flex;
+    justify-content: flex-start;
+}
+
+/* Стили для кнопки Назад сверху */
+.back-top-container {
+    padding: 100px 0 20px 0;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.back-top-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    color: #00d8ff;
+    text-decoration: none;
+    font-weight: 600;
+    padding: 12px 20px;
+    border-radius: 8px;
+    background: #161b22;
+    border: 1px solid #30363d;
+    transition: all 0.3s ease;
+}
+
+.back-top-btn:hover {
+    background: #1c2128;
+    border-color: #00d8ff;
+    transform: translateY(-2px);
+}
+
+.back-arrow {
+    font-size: 1.2em;
+}
+
+/* Стили для детального просмотра урока */
+.lesson-detail-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #30363d;
+}
+
+.lesson-detail-header h2 {
+    color: #00d8ff;
+    margin: 0;
+}
+
+/* Стили для кнопки Назад сверху */
+.back-top-container {
+    padding: 100px 0 20px 0;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.back-top-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    color: #00d8ff;
+    text-decoration: none;
+    font-weight: 600;
+    padding: 12px 20px;
+    border-radius: 8px;
+    background: #161b22;
+    border: 1px solid #30363d;
+    transition: all 0.3s ease;
+}
+
+.back-top-btn:hover {
+    background: #1c2128;
+    border-color: #00d8ff;
+    transform: translateY(-2px);
+}
+
+.back-arrow {
+    font-size: 1.2em;
+}
+
+/* Стили для детального просмотра урока */
+.lesson-detail-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #30363d;
+}
+
+.lesson-detail-header h1 {
+    color: #00d8ff;
+    font-size: 2.5em;
+    margin: 0;
+}
+
+.lesson-detail-content {
+    color: #c9d1d9;
+    line-height: 1.7;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .back-top-container {
+        padding: 90px 15px 15px 15px;
+    }
+    
+    .lesson-detail-header h1 {
+        font-size: 2em;
+    }
+}
+
+.lesson-content {
+    background: #161b22;
+    border: 1px solid #30363d;
+    border-radius: 15px;
+    padding: 40px;
+}
+
+.lesson-header {
+    margin-bottom: 40px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #30363d;
+}
+
+.lesson-header h1 {
+    color: #00d8ff;
+    font-size: 2.5em;
+    margin-bottom: 15px;
+}
+
+.lesson-meta {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+.level-badge {
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 0.8em;
+    font-weight: bold;
+}
+
+.level-badge.beginner {
+    background: #238636;
+    color: white;
+}
+
+/* Стили для контента из БД */
+.content-block {
+    margin-bottom: 40px;
+}
+
+.content-block h2 {
+    color: #ffffff;
+    margin-bottom: 25px;
+    font-size: 1.8em;
+}
+
+.text-content {
+    color: #c9d1d9;
+    line-height: 1.7;
+}
+
+.text-content p {
+    margin-bottom: 20px;
+}
+
+.code-block {
+    background: #0d1117;
+    border: 1px solid #30363d;
+    border-radius: 8px;
+    padding: 20px;
+    overflow-x: auto;
+    margin: 20px 0;
+}
+
+.code-block code {
+    color: #8b949e;
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+/* Стили для изображений */
+.image-container {
+    margin: 30px 0;
+    text-align: center;
+}
+
+.lesson-image {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    border: 1px solid #30363d;
+}
+
+.image-caption {
+    color: #8b949e;
+    font-size: 0.9em;
+    margin-top: 10px;
+    font-style: italic;
+}
+
+/* Навигация */
+.lesson-navigation {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 50px;
+    padding-top: 30px;
+    border-top: 1px solid #30363d;
+}
+
+.nav-btn {
+    background: #00d8ff;
+    color: #000000;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.nav-btn:hover:not(:disabled) {
+    background: #61dafb;
+    transform: translateY(-2px);
+}
+
+.nav-btn:disabled {
+    background: #666;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.prev-btn {
+    background: #30363d;
+    color: #8b949e;
+}
+
+.prev-btn:hover:not(:disabled) {
+    background: #484f58;
+    color: #ffffff;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .lesson-container {
+        padding: 100px 15px 60px;
+    }
+    
+    .lesson-content {
+        padding: 25px;
+    }
+    
+    .lesson-header h1 {
+        font-size: 2em;
+    }
+    
+    .lesson-navigation {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .nav-btn {
+        width: 100%;
+        text-align: center;
+    }
+}
+
+/* Стили для кнопок открытия уроков */
+.lesson-nav-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 15px;
+    margin-bottom: 8px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    color: #8b949e;
+    justify-content: space-between;
+}
+
+.nav-title {
+    flex-grow: 1;
+}
+
+.open-lesson-btn {
+    background: #238636;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 0.8em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+}
+
+.open-lesson-btn:hover {
+    background: #2ea043;
+    transform: translateY(-1px);
+}
+
+.lesson-nav-item:hover {
+    background: #1c2128;
+    color: #ffffff;
+}
+
+.lesson-nav-item:hover .open-lesson-btn {
+    background: #00d8ff;
+    color: #000000;
+}
+
+/* Стили для приветственного контента */
+.welcome-content {
+    text-align: center;
+    padding: 40px 20px;
+}
+
+.welcome-content h2 {
+    color: #00d8ff;
+    margin-bottom: 20px;
+    font-size: 2em;
+}
+
+.welcome-content p {
+    color: #8b949e;
+    font-size: 1.1em;
+    margin-bottom: 15px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Адаптивность для кнопок */
+@media (max-width: 768px) {
+    .lesson-nav-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+    
+    .open-lesson-btn {
+        align-self: flex-end;
+        margin-top: 5px;
+    }
+    
+    .welcome-content {
+        padding: 20px 10px;
+    }
+    
+    .welcome-content h2 {
+        font-size: 1.5em;
+    }
+}
+
+/* Стили для центрированного контейнера */
+.lesson-container-centered {
+    display: flex;
+    justify-content: center;
+    padding: 40px 20px 80px;
+}
+
+.centered-content {
+    max-width: 800px;
+    width: 100%;
+}
+
+/* Стили для центрированной боковой панели */
+.lesson-sidebar-centered {
+    background: #161b22;
+    border: 1px solid #30363d;
+    border-radius: 15px;
+    padding: 30px;
+}
+
+.lesson-nav-centered h3 {
+    color: #00d8ff;
+    text-align: center;
+    margin-bottom: 25px;
+    font-size: 1.5em;
+}
+
+/* Стили для центрированных элементов навигации */
+.lesson-nav-item-centered {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 15px 20px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+    color: #8b949e;
+    justify-content: space-between;
+    background: #0d1117;
+    border: 1px solid #30363d;
+}
+
+.lesson-nav-item-centered:hover {
+    background: #1c2128;
+    border-color: #00d8ff;
+    color: #ffffff;
+}
+
+.nav-title-centered {
+    flex-grow: 1;
+    font-weight: 500;
+}
+
+.nav-number-centered {
+    background: rgba(0, 216, 255, 0.1);
+    color: #00d8ff;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 0.9em;
+    flex-shrink: 0;
+}
+
+.open-lesson-btn-centered {
+    background: #238636;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-size: 0.9em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.open-lesson-btn-centered:hover {
+    background: #2ea043;
+    transform: translateY(-1px);
+}
+
+.lesson-nav-item-centered:hover .open-lesson-btn-centered {
+    background: #00d8ff;
+    color: #000000;
+}
+
+/* Адаптивность для центрированной версии */
+@media (max-width: 768px) {
+    .lesson-container-centered {
+        padding: 20px 15px 60px;
+    }
+    
+    .lesson-sidebar-centered {
+        padding: 20px;
+    }
+    
+    .lesson-nav-item-centered {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+        padding: 15px;
+    }
+    
+    .open-lesson-btn-centered {
+        align-self: stretch;
+        text-align: center;
+        margin-top: 5px;
+    }
+    
+    .nav-number-centered {
+        align-self: flex-start;
+    }
+}
+
+@media (max-width: 480px) {
+    .lesson-nav-item-centered {
+        padding: 12px;
+    }
+    
+    .nav-number-centered {
+        width: 25px;
+        height: 25px;
+        font-size: 0.8em;
+    }
+    
+    .open-lesson-btn-centered {
+        padding: 6px 12px;
+        font-size: 0.8em;
+    }
+}
+
+/* Стили для динамической версии */
+.lesson-container-dynamic {
+    display: grid;
+    grid-template-columns: 400px 1fr;
+    gap: 40px;
+    padding: 40px 20px 80px;
+    max-width: 1400px;
+    margin: 0 auto;
+    min-height: 60vh;
+}
+
+.lesson-sidebar-dynamic {
+    background: #161b22;
+    border: 1px solid #30363d;
+    border-radius: 15px;
+    padding: 25px;
+    height: fit-content;
+    position: sticky;
+    top: 120px;
+}
+
+.lesson-nav-dynamic h3 {
+    color: #00d8ff;
+    text-align: center;
+    margin-bottom: 25px;
+    font-size: 1.3em;
+}
+
+.lesson-nav-item-dynamic {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 15px;
+    margin-bottom: 8px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    color: #8b949e;
+    justify-content: space-between;
+}
+
+.lesson-nav-item-dynamic:hover {
+    background: #1c2128;
+    color: #ffffff;
+}
+
+.lesson-nav-item-dynamic.active {
+    background: #00d8ff;
+    color: #000000;
+    font-weight: 600;
+}
+
+.lesson-nav-item-dynamic.active .nav-number-dynamic {
+    background: rgba(0, 0, 0, 0.2);
+    color: #000000;
+}
+
+.lesson-nav-item-dynamic.active .open-lesson-btn-dynamic {
+    background: #000000;
+    color: #00d8ff;
+}
+
+.nav-title-dynamic {
+    flex-grow: 1;
+}
+
+.nav-number-dynamic {
+    background: rgba(0, 216, 255, 0.1);
+    color: #00d8ff;
+    border-radius: 50%;
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 0.9em;
+    flex-shrink: 0;
+}
+
+.open-lesson-btn-dynamic {
+    background: #238636;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 0.8em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+}
+
+.open-lesson-btn-dynamic:hover {
+    background: #2ea043;
+    transform: translateY(-1px);
+}
+
+.lesson-content-dynamic {
+    background: #161b22;
+    border: 1px solid #30363d;
+    border-radius: 15px;
+    padding: 40px;
+    min-height: 500px;
+}
+
+.welcome-message {
+    text-align: center;
+    padding: 60px 20px;
+    color: #8b949e;
+}
+
+.welcome-message h2 {
+    color: #00d8ff;
+    margin-bottom: 20px;
+}
+
+.lesson-detail-content h1 {
+    color: #00d8ff;
+    margin-bottom: 25px;
+    font-size: 2.2em;
+}
+
+.lesson-detail-content p {
+    color: #c9d1d9;
+    line-height: 1.7;
+    margin-bottom: 20px;
+}
+
+.lesson-meta {
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid #30363d;
+    color: #8b949e;
+    font-size: 0.9em;
+}
+
+/* Адаптивность для динамической версии */
+@media (max-width: 1024px) {
+    .lesson-container-dynamic {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+    
+    .lesson-sidebar-dynamic {
+        position: static;
+        order: 1;
+    }
+    
+    .lesson-content-dynamic {
+        order: 2;
+    }
+}
+
+@media (max-width: 768px) {
+    .lesson-container-dynamic {
+        padding: 20px 15px 60px;
+    }
+    
+    .lesson-content-dynamic {
+        padding: 25px;
+    }
+    
+    .lesson-detail-content h1 {
+        font-size: 1.8em;
+    }
+    
+    .lesson-nav-item-dynamic {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+    
+    .open-lesson-btn-dynamic {
+        align-self: stretch;
+        text-align: center;
+        margin-top: 5px;
+    }
+}

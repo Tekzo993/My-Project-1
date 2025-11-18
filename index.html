@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>C++ PRO - Обучение программированию</title>
     <link rel="stylesheet" href="styles.css">
+    <script type="module" src="firebase.js"></script>
 </head>
 <body>
     <!-- Навигация -->
@@ -44,7 +45,7 @@
                         <span class="course-level beginner">НАЧАЛЬНЫЙ</span>
                         <h3>Введение в C++</h3>
                         <div class="lesson-list">
-                            <div class="lesson-item" onclick="window.location.href='index2.html'">
+                            <div class="lesson-item" onclick="window.location.href='index2-0.html'">
                                 <span class="lesson-title">Первые шаги</span>
                                 <span class="lesson-status">▶️</span>
                             </div>
@@ -66,11 +67,11 @@
                         <span class="course-level beginner">НАЧАЛЬНЫЙ</span>
                         <h3>Строки и ввод-вывод</h3>
                         <div class="lesson-list">
-                            <div class="lesson-item" onclick="window.location.href='index2-8.html'">
+                            <div class="lesson-item" onclick="window.location.href='index2-3.html'">
                                 <span class="lesson-title">Работа со строками</span>
                                 <span class="lesson-status">▶️</span>
                             </div>
-                            <div class="lesson-item" onclick="window.location.href='index2-12.html'">
+                            <div class="lesson-item" onclick="window.location.href='index2-3-1.html'">
                                 <span class="lesson-title">Потоки ввода-вывода</span>
                                 <span class="lesson-status">▶️</span>
                             </div>
@@ -89,7 +90,7 @@
                         <span class="course-level intermediate">СРЕДНИЙ</span>
                         <h3>Указатели и память</h3>
                         <div class="lesson-list">
-                            <div class="lesson-item" onclick="window.location.href='index2-2.html'">
+                            <div class="lesson-item" onclick="window.location.href='index2-4.html'">
                                 <span class="lesson-title">Основы указателей</span>
                                 <span class="lesson-status">▶️</span>
                             </div>
@@ -100,7 +101,7 @@
                         <span class="course-level intermediate">СРЕДНИЙ</span>
                         <h3>Функции</h3>
                         <div class="lesson-list">
-                            <div class="lesson-item" onclick="window.location.href='index2-3.html'">
+                            <div class="lesson-item" onclick="window.location.href='index2-5.html'">
                                 <span class="lesson-title">Создание функций</span>
                                 <span class="lesson-status">▶️</span>
                             </div>
@@ -109,21 +110,10 @@
 
                     <div class="course-card">
                         <span class="course-level intermediate">СРЕДНИЙ</span>
-                        <h3>Динамическая память</h3>
+                        <h3>Память</h3>
                         <div class="lesson-list">
-                            <div class="lesson-item" onclick="window.location.href='index2-4.html'">
+                            <div class="lesson-item" onclick="window.location.href='index2-6.html'">
                                 <span class="lesson-title">Управление памятью</span>
-                                <span class="lesson-status">▶️</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="course-card">
-                        <span class="course-level intermediate">СРЕДНИЙ</span>
-                        <h3>STL контейнеры</h3>
-                        <div class="lesson-list">
-                            <div class="lesson-item" onclick="window.location.href='index2-14.html'">
-                                <span class="lesson-title">Векторы, карты, множества</span>
                                 <span class="lesson-status">▶️</span>
                             </div>
                         </div>
@@ -141,7 +131,7 @@
                         <span class="course-level advanced">ПРОДВИНУТЫЙ</span>
                         <h3>ООП в C++</h3>
                         <div class="lesson-list">
-                            <div class="lesson-item" onclick="window.location.href='index2-5.html'">
+                            <div class="lesson-item" onclick="window.location.href='index2-7.html'">
                                 <span class="lesson-title">Классы и объекты</span>
                                 <span class="lesson-status">▶️</span>
                             </div>
@@ -152,7 +142,7 @@
                         <span class="course-level advanced">ПРОДВИНУТЫЙ</span>
                         <h3>Исключения</h3>
                         <div class="lesson-list">
-                            <div class="lesson-item" onclick="window.location.href='index2-6.html'">
+                            <div class="lesson-item" onclick="window.location.href='index2-8.html'">
                                 <span class="lesson-title">Обработка исключений</span>
                                 <span class="lesson-status">▶️</span>
                             </div>
@@ -163,7 +153,7 @@
                         <span class="course-level advanced">ПРОДВИНУТЫЙ</span>
                         <h3>Шаблоны</h3>
                         <div class="lesson-list">
-                            <div class="lesson-item" onclick="window.location.href='index2-7.html'">
+                            <div class="lesson-item" onclick="window.location.href='index2-9.html'">
                                 <span class="lesson-title">Шаблоны функций и классов</span>
                                 <span class="lesson-status">▶️</span>
                             </div>
@@ -174,7 +164,7 @@
                         <span class="course-level advanced">ПРОДВИНУТЫЙ</span>
                         <h3>Семантика перемещения</h3>
                         <div class="lesson-list">
-                            <div class="lesson-item" onclick="window.location.href='index2-9.html'">
+                            <div class="lesson-item" onclick="window.location.href='index2-10.html'">
                                 <span class="lesson-title">Rvalue-ссылки и move</span>
                                 <span class="lesson-status">▶️</span>
                             </div>
@@ -191,28 +181,6 @@
                             </div>
                         </div>
                     </div>
-
-                    <div class="course-card">
-                        <span class="course-level advanced">ПРОДВИНУТЫЙ</span>
-                        <h3>Указатели</h3>
-                        <div class="lesson-list">
-                            <div class="lesson-item" onclick="window.location.href='index2-2.html'">
-                                <span class="lesson-title">Smart pointers</span>
-                                <span class="lesson-status">▶️</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="course-card">
-                        <span class="course-level advanced">ПРОДВИНУТЫЙ</span>
-                        <h3>Концепты C++20</h3>
-                        <div class="lesson-list">
-                            <div class="lesson-item" onclick="window.location.href='index2-11.html'">
-                                <span class="lesson-title">Концепты и ограничения</span>
-                                <span class="lesson-status">▶️</span>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
 
@@ -220,17 +188,137 @@
 
         <!-- Остальные секции (поиск, ассистент, памятки) остаются без изменений -->
         <section id="search" class="tab-content">
-            <h2 class="section-title">Поиск по операторам</h2>
-            <div class="search-container">
-                <div class="search-box">
-                    <input type="text" placeholder="Введите оператор или ключевое слово..." class="search-input">
-                    <button class="search-btn">Найти</button>
+    <h2 class="section-title">Поиск по операторам</h2>
+    <div class="search-container">
+        <div class="search-box">
+            <input type="text" placeholder="Введите оператор или ключевое слово..." class="search-input">
+            <button class="search-btn">Найти</button>
+        </div>
+        
+        <!-- Краткий справочник -->
+        <div class="reference-section">
+            <h3>📚 Краткий справочник по C++</h3>
+            
+            <div class="reference-grid">
+                <!-- Операторы -->
+                <div class="reference-category">
+                    <h4>🔧 Основные операторы</h4>
+                    <div class="reference-list">
+                        <div class="reference-item">
+                            <code>&</code> - оператор взятия адреса
+                        </div>
+                        <div class="reference-item">
+                            <code>*</code> - оператор разыменования
+                        </div>
+                        <div class="reference-item">
+                            <code>-></code> - доступ к члену через указатель
+                        </div>
+                        <div class="reference-item">
+                            <code>::</code> - оператор области видимости
+                        </div>
+                        <div class="reference-item">
+                            <code>new</code> - динамическое выделение памяти
+                        </div>
+                        <div class="reference-item">
+                            <code>delete</code> - освобождение памяти
+                        </div>
+                        <div class="reference-item">
+                            <code>.</code> - доступ к члену объекта
+                        </div>
+                        <div class="reference-item">
+                            <code>sizeof</code> - размер типа/объекта
+                        </div>
+                    </div>
                 </div>
-                <div class="search-results">
-                    <p>Функциональность поиска будет добавлена позже</p>
+
+                <!-- Типы переменных -->
+                <div class="reference-category">
+                    <h4>📦 Типы переменных</h4>
+                    <div class="reference-list">
+                        <div class="reference-item">
+                            <code>int</code> - целые числа
+                        </div>
+                        <div class="reference-item">
+                            <code>float</code> - числа с плавающей точкой
+                        </div>
+                        <div class="reference-item">
+                            <code>double</code> - double точность
+                        </div>
+                        <div class="reference-item">
+                            <code>char</code> - символы
+                        </div>
+                        <div class="reference-item">
+                            <code>bool</code> - логический тип
+                        </div>
+                        <div class="reference-item">
+                            <code>void</code> - отсутствие типа
+                        </div>
+                        <div class="reference-item">
+                            <code>auto</code> - автоматическое определение типа
+                        </div>
+                        <div class="reference-item">
+                            <code>string</code> - строки (из STL)
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Управление памятью -->
+                <div class="reference-category">
+                    <h4>💾 Управление памятью</h4>
+                    <div class="reference-list">
+                        <div class="reference-item">
+                            <code>int*</code> - указатель на int
+                        </div>
+                        <div class="reference-item">
+                            <code>&variable</code> - адрес переменной
+                        </div>
+                        <div class="reference-item">
+                            <code>*ptr</code> - значение по указателю
+                        </div>
+                        <div class="reference-item">
+                            <code>new int[10]</code> - массив в куче
+                        </div>
+                        <div class="reference-item">
+                            <code>delete[]</code> - удаление массива
+                        </div>
+                        <div class="reference-item">
+                            <code>nullptr</code> - нулевой указатель
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ООП -->
+                <div class="reference-category">
+                    <h4>🏗️ ООП</h4>
+                    <div class="reference-list">
+                        <div class="reference-item">
+                            <code>class</code> - объявление класса
+                        </div>
+                        <div class="reference-item">
+                            <code>public:</code> - публичные члены
+                        </div>
+                        <div class="reference-item">
+                            <code>private:</code> - приватные члены
+                        </div>
+                        <div class="reference-item">
+                            <code>protected:</code> - защищенные члены
+                        </div>
+                        <div class="reference-item">
+                            <code>virtual</code> - виртуальные функции
+                        </div>
+                        <div class="reference-item">
+                            <code>override</code> - переопределение
+                        </div>
+                    </div>
                 </div>
             </div>
-        </section>
+        </div>
+
+        <div class="search-results">
+            <p>Функциональность поиска будет добавлена позже</p>
+        </div>
+    </div>
+</section>
 
         <section id="assistant" class="tab-content">
             <h2 class="section-title">AI Ассистент</h2>

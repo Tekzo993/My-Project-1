@@ -1,5 +1,9 @@
 // script.js - объединенный файл для сайта C++ PRO
 
+// ==================== FIREBASE ИМПОРТ И ФУНКЦИИ ====================
+import { db } from './firebase.js';
+import { doc, getDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
 // ==================== СИСТЕМА ВКЛАДОК ====================
 function initTabs() {
     const navLinks = document.querySelectorAll('.nav-link');
@@ -188,6 +192,116 @@ function initLessonNavigation() {
     });
 }
 
+// ==================== FIREBASE - ЗАГРУЗКА УРОКОВ ====================
+async function loadLessonsFromFirebase() {
+    try {
+        console.log('🔄 Загружаем уроки из Firebase...');
+        
+        const levels = ['beginner', 'intermediate', 'advanced'];
+        let hasData = false;
+        
+        for (const level of levels) {
+            const levelDoc = await getDoc(doc(db, 'lessons', level));
+            
+            if (levelDoc.exists()) {
+                const lessons = levelDoc.data().items;
+                renderLessonsFromFirebase(level, lessons);
+                hasData = true;
+                console.log(`✅ Загружены уроки уровня: ${level}`);
+            }
+        }
+        
+        if (!hasData) {
+            console.log('📝 В Firebase нет данных, используем статические уроки');
+        }
+        
+    } catch (error) {
+        console.error('❌ Ошибка загрузки из Firebase:', error);
+        // Продолжаем работу со статическими уроками
+    }
+}
+
+// Функция рендеринга уроков из Firebase
+function renderLessonsFromFirebase(level, lessons) {
+    const levelSection = document.getElementById(level);
+    if (!levelSection) return;
+    
+    const coursesGrid = levelSection.querySelector('.courses-grid');
+    if (!coursesGrid) return;
+    
+    // Очищаем старые карточки
+    coursesGrid.innerHTML = '';
+    
+    // Группируем уроки по категориям
+    const courses = {};
+    
+    lessons.forEach(lesson => {
+        const category = lesson.category || 'Основы C++';
+        if (!courses[category]) {
+            courses[category] = [];
+        }
+        courses[category].push(lesson);
+    });
+    
+    // Создаем карточки курсов
+    Object.entries(courses).forEach(([category, categoryLessons]) => {
+        const courseCard = document.createElement('div');
+        courseCard.className = 'course-card';
+        
+        courseCard.innerHTML = `
+            <span class="course-level ${level}">${getLevelName(level)}</span>
+            <h3>${category}</h3>
+            <div class="lesson-list">
+                ${categoryLessons.map(lesson => `
+                    <div class="lesson-item" onclick="openFirebaseLesson('${lesson.id}', '${level}')">
+                        <span class="lesson-title">${lesson.title}</span>
+                        <span class="lesson-status">▶️</span>
+                    </div>
+                `).join('')}
+            </div>
+        `;
+        
+        coursesGrid.appendChild(courseCard);
+    });
+}
+
+// Функция открытия урока из Firebase
+function openFirebaseLesson(lessonId, level) {
+    console.log(`Открываем урок: ${lessonId} из уровня: ${level}`);
+    // Пока используем существующие HTML файлы как заглушку
+    // В будущем можно сделать динамическую загрузку контента из Firebase
+    
+    const lessonMap = {
+        'lesson-1': 'index2-0.html',
+        'lesson-2': 'index2-1.html',
+        'lesson-3': 'index2-3.html',
+        'lesson-4': 'index2-3-1.html',
+        'lesson-5': 'index2-4.html',
+        'lesson-6': 'index2-5.html',
+        'lesson-7': 'index2-6.html',
+        'lesson-8': 'index2-7.html',
+        'lesson-9': 'index2-8.html',
+        'lesson-10': 'index2-9.html',
+        'lesson-11': 'index2-10.html'
+    };
+    
+    const lessonFile = lessonMap[lessonId] || 'index2-0.html';
+    window.location.href = lessonFile;
+}
+
+// Вспомогательная функция для названий уровней
+function getLevelName(level) {
+    const levels = {
+        beginner: 'НАЧАЛЬНЫЙ',
+        intermediate: 'СРЕДНИЙ', 
+        advanced: 'ПРОДВИНУТЫЙ'
+    };
+    return levels[level] || level.toUpperCase();
+}
+
+// Делаем функции глобальными для onclick
+window.openFirebaseLesson = openFirebaseLesson;
+
 // ==================== ИНИЦИАЛИЗАЦИЯ ВСЕГО ПРИ ЗАГРУЗКЕ ====================
 document.addEventListener('DOMContentLoaded', function() {
     console.log('🚀 C++ PRO сайт загружается...');
@@ -197,6 +311,11 @@ document.addEventListener('DOMContentLoaded', function() {
     initSmoothScroll();
     initNavbarScroll();
     initLessonNavigation();
+    
+    // Загружаем уроки из Firebase через секунду после загрузки
+    setTimeout(() => {
+        loadLessonsFromFirebase();
+    }, 1000);
     
     console.log('✅ Все системы запущены!');
 });
