@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Первые шаги - C++ PRO</title>
     <link rel="stylesheet" href="styles.css">
+    <script type="module" src="firebase.js"></script>
 </head>
 <body>
     <!-- Навигация -->
@@ -66,43 +67,124 @@
         </div>
     </main>
 
-    <script>
-        // База данных с контентом уроков
-        const lessonsDatabase = {
-            'what-is-cpp': {
-                title: 'Что такое C++?',
-                content: `
-                    <h1>Что такое C++?</h1>
-                    <div class="text-content">
-                        <p><strong>C++</strong> - это мощный язык программирования общего назначения, который был создан как расширение языка C.</p>
-                        
-                        <div class="content-block2">
-                            <div class="title">Язык программирования C++</div>
-                            <p>Подробное описание языка программирования C++ будет здесь...</p>
-                        </div>
-                    </div>
-                `
-            },
-            'first-program': {
-                title: 'Первая программа в Visual Studio',
-                content: `
-                    <h1>Первая программа в Visual Studio</h1>
-                    <div class="text-content">
-                        <p>Создание первой программы в Visual Studio...</p>
-                        
-                        <div class="content-block2">
-                            <div class="title">Первая программа в Visual Studio</div>
-                            <p>Инструкция по созданию первой программы будет здесь...</p>
-                        </div>
-                    </div>
-                `
+    <script type="module">
+        import { db } from './firebase.js';
+        import { doc, getDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+        // Глобальная переменная для хранения контента из Firebase
+        let firebaseLessonsContent = {};
+
+        // Загружаем контент из Firebase при загрузке страницы
+        async function loadLessonContentFromFirebase() {
+            try {
+                console.log('🔄 Загружаем контент урока из Firebase...');
+                
+                const lessonDoc = await getDoc(doc(db, 'lessons', 'beginner'));
+                
+                if (lessonDoc.exists()) {
+                    const lessons = lessonDoc.data().items;
+                    
+                    // Сохраняем контент в глобальную переменную
+                    lessons.forEach(lesson => {
+                        if (lesson.id === "lesson-1") {
+                            firebaseLessonsContent = {
+                                'what-is-cpp': {
+                                    title: 'Что такое C++?',
+                                    content: lesson.content // Контент из Firebase
+                                },
+                                'first-program': {
+                                    title: 'Первая программа в Visual Studio', 
+                                    content: lesson.content // Контент из Firebase
+                                }
+                            };
+                        }
+                    });
+                    
+                    console.log('✅ Контент загружен из Firebase!');
+                    
+                    // Автоматически открываем первый урок после загрузки
+                    const firstLesson = document.querySelector('.lesson-nav-item-dynamic');
+                    if (firstLesson) {
+                        firstLesson.classList.add('active');
+                        const firstLessonId = firstLesson.getAttribute('data-lesson');
+                        const firstLessonTitle = firstLesson.querySelector('.nav-title-dynamic').textContent;
+                        showLessonContent(firstLessonId, firstLessonTitle);
+                    }
+                } else {
+                    console.log('📝 В Firebase нет данных, используем локальный контент');
+                    showFallbackContent();
+                }
+                
+            } catch (error) {
+                console.error('❌ Ошибка загрузки из Firebase:', error);
+                showFallbackContent();
             }
-        };
+        }
+
+        // Функция показа контента урока
+        function showLessonContent(lessonId, lessonTitle) {
+            const lessonContent = document.getElementById('lessonContent');
+            
+            // Проверяем есть ли урок в Firebase
+            if (firebaseLessonsContent[lessonId]) {
+                const lesson = firebaseLessonsContent[lessonId];
+                lessonContent.innerHTML = `
+                    <div class="lesson-detail-content">
+                        ${lesson.content}
+                    </div>
+                `;
+            } else {
+                // Если урока нет в Firebase (заглушка)
+                lessonContent.innerHTML = `
+                    <div class="lesson-detail-content">
+                        <h1>${lessonTitle}</h1>
+                        <p>Контент для этого урока загружается из Firebase...</p>
+                        <div class="loading">Загрузка...</div>
+                    </div>
+                `;
+            }
+        }
+
+        // Fallback контент если Firebase не работает
+        function showFallbackContent() {
+            const fallbackContent = {
+                'what-is-cpp': {
+                    title: 'Что такое C++?',
+                    content: `
+                        <h1>Что такое C++?</h1>
+                        <div class="text-content">
+                            <p><strong>C++</strong> - это мощный язык программирования общего назначения, который был создан как расширение языка C.</p>
+                            <p>Контент временно недоступен. Данные загружаются из Firebase.</p>
+                        </div>
+                    `
+                },
+                'first-program': {
+                    title: 'Первая программа в Visual Studio',
+                    content: `
+                        <h1>Первая программа в Visual Studio</h1>
+                        <div class="text-content">
+                            <p>Создание первой программы в Visual Studio...</p>
+                            <p>Контент временно недоступен. Данные загружаются из Firebase.</p>
+                        </div>
+                    `
+                }
+            };
+            
+            firebaseLessonsContent = fallbackContent;
+            
+            // Открываем первый урок
+            const firstLesson = document.querySelector('.lesson-nav-item-dynamic');
+            if (firstLesson) {
+                firstLesson.classList.add('active');
+                const firstLessonId = firstLesson.getAttribute('data-lesson');
+                const firstLessonTitle = firstLesson.querySelector('.nav-title-dynamic').textContent;
+                showLessonContent(firstLessonId, firstLessonTitle);
+            }
+        }
 
         // Обработка кликов по кнопкам "Открыть"
         document.addEventListener('DOMContentLoaded', function() {
             const openButtons = document.querySelectorAll('.open-lesson-btn-dynamic');
-            const lessonContent = document.getElementById('lessonContent');
             
             openButtons.forEach(button => {
                 button.addEventListener('click', function() {
@@ -121,35 +203,8 @@
                 });
             });
 
-            // Функция показа контента урока
-            function showLessonContent(lessonId, lessonTitle) {
-                // Проверяем есть ли урок в базе
-                if (lessonsDatabase[lessonId]) {
-                    const lesson = lessonsDatabase[lessonId];
-                    lessonContent.innerHTML = `
-                        <div class="lesson-detail-content">
-                            ${lesson.content}
-                        </div>
-                    `;
-                } else {
-                    // Если урока нет в базе (заглушка)
-                    lessonContent.innerHTML = `
-                        <div class="lesson-detail-content">
-                            <h1>${lessonTitle}</h1>
-                            <p>Контент для этого урока пока не добавлен в базу данных.</p>
-                        </div>
-                    `;
-                }
-            }
-
-            // Автоматически открываем первый урок
-            const firstLesson = document.querySelector('.lesson-nav-item-dynamic');
-            if (firstLesson) {
-                firstLesson.classList.add('active');
-                const firstLessonId = firstLesson.getAttribute('data-lesson');
-                const firstLessonTitle = firstLesson.querySelector('.nav-title-dynamic').textContent;
-                showLessonContent(firstLessonId, firstLessonTitle);
-            }
+            // Загружаем контент из Firebase
+            loadLessonContentFromFirebase();
         });
     </script>
 </body>
