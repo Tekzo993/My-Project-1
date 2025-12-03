@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>C++ PRO - Обучение программированию</title>
+    <title>URcode - Обучение программированию</title>
     <link rel="stylesheet" href="styles.css">
     <script type="module" src="firebase.js"></script>
 </head>
@@ -11,19 +11,20 @@
     <!-- Навигация -->
     <nav class="navbar">
         <div class="nav-container">
-            <div class="logo">C++ PRO</div>
+            <div class="logo">URcode</div>
             <ul class="nav-links">
-                <li><a href="#theory" class="nav-link" data-tab="theory">Курсы</a></li>
-                <li><a href="#search" class="nav-link" data-tab="search">Поиск</a></li>
-                <li><a href="#assistant" class="nav-link" data-tab="assistant">Ассистент</a></li>
-                <li><a href="#notes" class="nav-link" data-tab="notes">Памятки</a></li>
+                <li><a href="index.html" class="nav-link" data-tab="theory">Курсы</a></li>
+                <li><a href="operators.html" class="nav-link">Поиск</a></li>
+                <li><a href="assistant.html" class="nav-link">Ассистент</a></li>
+                <li><a href="settings.html" class="nav-link" data-tab="settings">Настройки</a></li>
             </ul>
             <div class="nav-right">
-                <div class="nav-icon">⚙️</div>
+                <li><a href="" class="nav-link" data-tab=""></a></li>
             </div>
         </div>
     </nav>
 
+    <!-- Остальной код без изменений -->
     <!-- Герой секция -->
     <section class="hero">
         <h1>Освой C++ с нуля до PRO</h1>
@@ -175,163 +176,7 @@
 
         </section>
 
-        <!-- Остальные секции (поиск, ассистент, памятки) остаются без изменений -->
-        <section id="search" class="tab-content">
-    <h2 class="section-title">Поиск по операторам</h2>
-    <div class="search-container">
-        <div class="search-box">
-            <input type="text" placeholder="Введите оператор или ключевое слово..." class="search-input">
-            <button class="search-btn">Найти</button>
-        </div>
-        
-        <!-- Краткий справочник -->
-        <div class="reference-section">
-            <h3>📚 Краткий справочник по C++</h3>
-            
-            <div class="reference-grid">
-                <!-- Операторы -->
-                <div class="reference-category">
-                    <h4>🔧 Основные операторы</h4>
-                    <div class="reference-list">
-                        <div class="reference-item">
-                            <code>&</code> - оператор взятия адреса
-                        </div>
-                        <div class="reference-item">
-                            <code>*</code> - оператор разыменования
-                        </div>
-                        <div class="reference-item">
-                            <code>-></code> - доступ к члену через указатель
-                        </div>
-                        <div class="reference-item">
-                            <code>::</code> - оператор области видимости
-                        </div>
-                        <div class="reference-item">
-                            <code>new</code> - динамическое выделение памяти
-                        </div>
-                        <div class="reference-item">
-                            <code>delete</code> - освобождение памяти
-                        </div>
-                        <div class="reference-item">
-                            <code>.</code> - доступ к члену объекта
-                        </div>
-                        <div class="reference-item">
-                            <code>sizeof</code> - размер типа/объекта
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Типы переменных -->
-                <div class="reference-category">
-                    <h4>📦 Типы переменных</h4>
-                    <div class="reference-list">
-                        <div class="reference-item">
-                            <code>int</code> - целые числа
-                        </div>
-                        <div class="reference-item">
-                            <code>float</code> - числа с плавающей точкой
-                        </div>
-                        <div class="reference-item">
-                            <code>double</code> - double точность
-                        </div>
-                        <div class="reference-item">
-                            <code>char</code> - символы
-                        </div>
-                        <div class="reference-item">
-                            <code>bool</code> - логический тип
-                        </div>
-                        <div class="reference-item">
-                            <code>void</code> - отсутствие типа
-                        </div>
-                        <div class="reference-item">
-                            <code>auto</code> - автоматическое определение типа
-                        </div>
-                        <div class="reference-item">
-                            <code>string</code> - строки (из STL)
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Управление памятью -->
-                <div class="reference-category">
-                    <h4>💾 Управление памятью</h4>
-                    <div class="reference-list">
-                        <div class="reference-item">
-                            <code>int*</code> - указатель на int
-                        </div>
-                        <div class="reference-item">
-                            <code>&variable</code> - адрес переменной
-                        </div>
-                        <div class="reference-item">
-                            <code>*ptr</code> - значение по указателю
-                        </div>
-                        <div class="reference-item">
-                            <code>new int[10]</code> - массив в куче
-                        </div>
-                        <div class="reference-item">
-                            <code>delete[]</code> - удаление массива
-                        </div>
-                        <div class="reference-item">
-                            <code>nullptr</code> - нулевой указатель
-                        </div>
-                    </div>
-                </div>
-
-                <!-- ООП -->
-                <div class="reference-category">
-                    <h4>🏗️ ООП</h4>
-                    <div class="reference-list">
-                        <div class="reference-item">
-                            <code>class</code> - объявление класса
-                        </div>
-                        <div class="reference-item">
-                            <code>public:</code> - публичные члены
-                        </div>
-                        <div class="reference-item">
-                            <code>private:</code> - приватные члены
-                        </div>
-                        <div class="reference-item">
-                            <code>protected:</code> - защищенные члены
-                        </div>
-                        <div class="reference-item">
-                            <code>virtual</code> - виртуальные функции
-                        </div>
-                        <div class="reference-item">
-                            <code>override</code> - переопределение
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="search-results">
-            <p>Функциональность поиска будет добавлена позже</p>
-        </div>
-    </div>
-</section>
-
-        <section id="assistant" class="tab-content">
-            <h2 class="section-title">AI Ассистент</h2>
-            <div class="assistant-container">
-                <div class="chat-messages" id="chatMessages">
-                    <div class="message assistant-message">
-                        Привет! Я AI-ассистент по C++. Задавайте вопросы по программированию!
-                    </div>
-                </div>
-                
-                <div class="input-area">
-                    <input type="text" id="userInput" placeholder="Задайте вопрос по C++..." maxlength="500" class="chat-input">
-                    <button id="sendBtn" class="chat-btn">Отправить</button>
-                </div>
-                
-                <div class="suggestions">
-                    <p>Примеры вопросов:</p>
-                    <button class="suggestion-btn" data-question="Объясни указатели в C++">Объясни указатели</button>
-                    <button class="suggestion-btn" data-question="Что такое ООП в C++?">Что такое ООП?</button>
-                    <button class="suggestion-btn" data-question="Как работать с векторами в C++?">Векторы в C++</button>
-                </div>
-            </div>
-        </section>
-
+        <!-- Памятки -->
         <section id="notes" class="tab-content">
             <h2 class="section-title">Памятки и шпаргалки</h2>
             <div class="notes-grid">
@@ -359,4 +204,4 @@
 
     <script src="script.js"></script>
 </body>
-</html> 
+</html>

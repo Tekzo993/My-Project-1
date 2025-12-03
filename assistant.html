@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI Ассистент - C++ PRO</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Навигация -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">C++ PRO</div>
+            <ul class="nav-links">
+                <li><a href="index.html" class="nav-link">Курсы</a></li>
+                <li><a href="operators.html" class="nav-link">Поиск</a></li>
+                <li><a href="assistant.html" class="nav-link">Ассистент</a></li>
+                <li><a href="index.html" class="nav-link">Памятки</a></li>
+            </ul>
+            <div class="nav-right">
+                <div class="nav-icon">⚙️</div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Основной контент -->
+    <main class="container">
+        <div class="back-top-container">
+            <a href="index.html" class="back-top-btn">
+                <span class="back-arrow">←</span>
+                Назад к теории
+            </a>
+        </div>
+
+        <section class="tab-content active">
+            <h2 class="section-title">AI Ассистент по C++</h2>
+            <div class="assistant-container">
+                <div class="chat-messages" id="chatMessages">
+                    <div class="message assistant-message">
+                        Привет! Я AI-ассистент по C++. Задавайте вопросы по программированию, и я постараюсь помочь! 
+                        В данный момент используется локальная версия AI.
+                    </div>
+                </div>
+                
+                <div class="input-area">
+                    <input type="text" id="userInput" placeholder="Задайте вопрос по C++..." maxlength="500" class="chat-input">
+                    <button id="sendBtn" class="chat-btn">Отправить</button>
+                </div>
+                
+                <div class="suggestions">
+                    <p>Примеры вопросов:</p>
+                    <button class="suggestion-btn" data-question="Объясни указатели в C++">Объясни указатели</button>
+                    <button class="suggestion-btn" data-question="Что такое ООП в C++?">Что такое ООП?</button>
+                    <button class="suggestion-btn" data-question="Как работать с векторами в C++?">Векторы в C++</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // Инициализация AI ассистента
+        document.addEventListener('DOMContentLoaded', function() {
+            const chatMessages = document.getElementById('chatMessages');
+            const userInput = document.getElementById('userInput');
+            const sendBtn = document.getElementById('sendBtn');
+            const suggestionBtns = document.querySelectorAll('.suggestion-btn');
+
+            // Отправка сообщения по клику
+            sendBtn.addEventListener('click', function() {
+                const message = userInput.value.trim();
+                if (!message) return;
+
+                // Добавляем сообщение пользователя
+                addMessage('user', message);
+                userInput.value = '';
+                sendBtn.disabled = true;
+
+                // Показываем индикатор набора
+                const typingIndicator = addTypingIndicator();
+
+                // Имитируем вызов реального AI API с обработкой ошибок
+                simulateAIRequest(message)
+                    .then(response => {
+                        // Убираем индикатор
+                        typingIndicator.remove();
+                        // Добавляем успешный ответ
+                        addMessage('assistant', response);
+                    })
+                    .catch(error => {
+                        // Убираем индикатор
+                        typingIndicator.remove();
+                        // Добавляем сообщение об ошибке с кодом
+                        addMessage('assistant', `❌ Ошибка AI системы:\n\nКод ошибки: ${error.code}\nСообщение: ${error.message}\n\nПопробуйте позже или используйте локальную справку.`);
+                    })
+                    .finally(() => {
+                        sendBtn.disabled = false;
+                    });
+            });
+            
+            // Отправка сообщения по Enter
+            userInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    sendBtn.click();
+                }
+            });
+
+            // Кнопки-подсказки
+            suggestionBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    userInput.value = btn.dataset.question;
+                    sendBtn.click();
+                });
+            });
+
+            // Функция добавления сообщения в чат
+            function addMessage(sender, text) {
+                const messageDiv = document.createElement('div');
+                messageDiv.className = `message ${sender}-message`;
+                messageDiv.textContent = text;
+                chatMessages.appendChild(messageDiv);
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            }
+
+            // Индикатор набора текста
+            function addTypingIndicator() {
+                const indicator = document.createElement('div');
+                indicator.className = 'message assistant-message';
+                indicator.textContent = 'Ассистент печатает...';
+                indicator.style.color = '#8b949e';
+                indicator.style.fontStyle = 'italic';
+                chatMessages.appendChild(indicator);
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+                return indicator;
+            }
+
+            // Имитация вызова AI API с обработкой ошибок
+            function simulateAIRequest(message) {
+                return new Promise((resolve, reject) => {
+                    // Случайным образом генерируем ошибки для демонстрации
+                    const shouldFail = Math.random() < 0.3; // 30% chance of error
+                    
+                    setTimeout(() => {
+                        if (shouldFail) {
+                            // Генерируем случайную ошибку API
+                            const errors = [
+                                { code: '500', message: 'Internal Server Error - сервер AI временно недоступен' },
+                                { code: '429', message: 'Too Many Requests - превышен лимит запросов' },
+                                { code: '503', message: 'Service Unavailable - сервис AI перегружен' },
+                                { code: '401', message: 'Unauthorized - неверный API ключ' },
+                                { code: '408', message: 'Request Timeout - превышено время ожидания ответа' }
+                            ];
+                            const randomError = errors[Math.floor(Math.random() * errors.length)];
+                            reject(randomError);
+                        } else {
+                            // Успешный ответ от локального AI
+                            const response = getLocalAIResponse(message);
+                            resolve(response);
+                        }
+                    }, 1500);
+                });
+            }
+
+            // Локальная логика AI (заглушка)
+            function getLocalAIResponse(message) {
+                const responses = {
+                    'указатели': 'Указатели в C++ - это переменные, которые хранят адреса памяти других переменных. Они позволяют работать с памятью напрямую, что дает большую гибкость, но требует осторожности.',
+                    'ооп': 'ООП в C++ включает инкапсуляцию, наследование и полиморфизм. Классы объединяют данные и методы, а объекты - экземпляры классов.',
+                    'векторы': 'Векторы в C++ - это динамические массивы из STL. Они автоматически управляют памятью и предоставляют много полезных методов.'
+                };
+
+                const lowerMessage = message.toLowerCase();
+                
+                for (const [keyword, response] of Object.entries(responses)) {
+                    if (lowerMessage.includes(keyword)) {
+                        return response;
+                    }
+                }
+
+                return 'Отличный вопрос! В данный момент используется локальная версия AI. В будущем я буду подключен к мощной AI-системе для более точных ответов.';
+            }
+        });
+    </script>
+</body>
+</html>

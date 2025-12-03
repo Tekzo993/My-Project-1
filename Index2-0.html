@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Первые шаги - C++ PRO</title>
+    <title>Первые шаги - URcode</title>
     <link rel="stylesheet" href="styles.css">
     <script type="module" src="firebase.js"></script>
 </head>
@@ -11,15 +11,15 @@
     <!-- Навигация -->
     <nav class="navbar">
         <div class="nav-container">
-            <div class="logo">C++ PRO</div>
+            <div class="logo">URcode</div>
             <ul class="nav-links">
-                <li><a href="index.html" class="nav-link">Курсы</a></li>
-                <li><a href="index.html" class="nav-link">Поиск</a></li>
-                <li><a href="index.html" class="nav-link">Ассистент</a></li>
-                <li><a href="index.html" class="nav-link">Памятки</a></li>
+                <li><a href="index.html" class="nav-link" data-tab="theory">Курсы</a></li>
+                <li><a href="operators.html" class="nav-link">Поиск</a></li>
+                <li><a href="assistant.html" class="nav-link">Ассистент</a></li>
+                <li><a href="settings.html" class="nav-link" data-tab="settings">Настройки</a></li>
             </ul>
             <div class="nav-right">
-                <div class="nav-icon">⚙️</div>
+                <li><a href="" class="nav-link" data-tab=""></a></li>
             </div>
         </div>
     </nav>
@@ -40,13 +40,14 @@
                 <div class="lesson-nav-dynamic">
                     <h3>Содержание урока</h3>
                     
-                    <div class="lesson-nav-item-dynamic" data-lesson="lesson-1-1">
+                    <!-- 2 урока -->
+                    <div class="lesson-nav-item-dynamic" data-lesson="lesson-2">
                         <span class="nav-number-dynamic">1</span>
                         <span class="nav-title-dynamic">Что такое C++?</span>
                         <button class="open-lesson-btn-dynamic">Открыть</button>
                     </div>
                     
-                    <div class="lesson-nav-item-dynamic" data-lesson="lesson-1-2">
+                    <div class="lesson-nav-item-dynamic" data-lesson="lesson-1">
                         <span class="nav-number-dynamic">2</span>
                         <span class="nav-title-dynamic">Первая программа в Visual Studio</span>
                         <button class="open-lesson-btn-dynamic">Открыть</button>
@@ -83,32 +84,22 @@
                 if (lessonDoc.exists()) {
                     const lessons = lessonDoc.data().items;
                     
-                    // Ищем урок с id "lesson-1"
-                    const lesson1 = lessons.find(lesson => lesson.id === "lesson-1");
-                    
-                    if (lesson1) {
-                        firebaseLessonsContent = {
-                            'what-is-cpp': {
-                                title: 'Что такое C++?',
-                                content: lesson1.content
-                            },
-                            'first-program': {
-                                title: 'Первая программа в Visual Studio', 
-                                content: lesson1.content
-                            }
+                    // ЗАГРУЖАЕМ ВСЕ УРОКИ ИЗ FIREBASE
+                    lessons.forEach(lesson => {
+                        firebaseLessonsContent[lesson.id] = {
+                            title: lesson.title,
+                            content: lesson.content
                         };
-                        
-                        console.log('✅ Контент загружен из Firebase!');
-                        
-                        // Автоматически открываем первый урок
-                        const firstLesson = document.querySelector('.lesson-nav-item-dynamic');
-                        if (firstLesson) {
-                            firstLesson.classList.add('active');
-                            const firstLessonId = firstLesson.getAttribute('data-lesson');
-                            showLessonContent(firstLessonId);
-                        }
-                    } else {
-                        showError('Урок lesson-1 не найден в Firebase');
+                    });
+                    
+                    console.log('✅ Загружены уроки:', Object.keys(firebaseLessonsContent));
+                    
+                    // Автоматически открываем первый урок
+                    const firstLesson = document.querySelector('.lesson-nav-item-dynamic');
+                    if (firstLesson && Object.keys(firebaseLessonsContent).length > 0) {
+                        firstLesson.classList.add('active');
+                        const firstLessonId = firstLesson.getAttribute('data-lesson');
+                        showLessonContent(firstLessonId);
                     }
                 } else {
                     showError('Документ beginner не найден в Firebase');
@@ -116,7 +107,7 @@
                 
             } catch (error) {
                 console.error('❌ Ошибка загрузки из Firebase:', error);
-                showError('Ошибка подключения к Firebase');
+                showError('Ошибка подключения к Firebase: ' + error.message);
             }
         }
 
@@ -132,7 +123,7 @@
                     </div>
                 `;
             } else {
-                showError('Контент урока не загружен');
+                showError(`Контент урока ${lessonId} не загружен. Доступные уроки: ${Object.keys(firebaseLessonsContent).join(', ')}`);
             }
         }
 

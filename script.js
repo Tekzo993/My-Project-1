@@ -319,3 +319,4 @@ document.addEventListener('DOMContentLoaded', function() {
     
     console.log('✅ Все системы запущены!');
 });
+
