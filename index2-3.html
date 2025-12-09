@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Строки - URcode</title>
     <link rel="stylesheet" href="styles.css">
+    <script type="module" src="firebase.js"></script>
 </head>
 <body>
     <!-- Навигация -->
@@ -40,61 +41,61 @@
                     <h3>Содержание урока</h3>
                     
                     <!-- Каждый пункт с кнопкой перехода -->
-                    <div class="lesson-nav-item-dynamic" data-lesson="string-definition">
+                    <div class="lesson-nav-item-dynamic" data-firebase-id="lesson-3">
                         <span class="nav-number-dynamic">1</span>
                         <span class="nav-title-dynamic">Определение строк</span>
                         <button class="open-lesson-btn-dynamic">Открыть</button>
                     </div>
                     
-                    <div class="lesson-nav-item-dynamic" data-lesson="unicode-strings">
+                    <div class="lesson-nav-item-dynamic" data-firebase-id="lesson-3-1">
                         <span class="nav-number-dynamic">2</span>
                         <span class="nav-title-dynamic">Строки с поддержкой Unicode</span>
                         <button class="open-lesson-btn-dynamic">Открыть</button>
                     </div>
                     
-                    <div class="lesson-nav-item-dynamic" data-lesson="type-conversion">
+                    <div class="lesson-nav-item-dynamic" data-firebase-id="lesson-3-2">
                         <span class="nav-number-dynamic">3</span>
                         <span class="nav-title-dynamic">Преобразование типов и строк</span>
                         <button class="open-lesson-btn-dynamic">Открыть</button>
                     </div>
                     
-                    <div class="lesson-nav-item-dynamic" data-lesson="string-comparison">
+                    <div class="lesson-nav-item-dynamic" data-firebase-id="lesson-3-3">
                         <span class="nav-number-dynamic">4</span>
                         <span class="nav-title-dynamic">Сравнение строк</span>
                         <button class="open-lesson-btn-dynamic">Открыть</button>
                     </div>
                     
-                    <div class="lesson-nav-item-dynamic" data-lesson="substring-operations">
+                    <div class="lesson-nav-item-dynamic" data-firebase-id="lesson-3-4">
                         <span class="nav-number-dynamic">5</span>
                         <span class="nav-title-dynamic">Получение подстроки и проверка начала и конца строки</span>
                         <button class="open-lesson-btn-dynamic">Открыть</button>
                     </div>
                     
-                    <div class="lesson-nav-item-dynamic" data-lesson="substring-search">
+                    <div class="lesson-nav-item-dynamic" data-firebase-id="lesson-3-5">
                         <span class="nav-number-dynamic">6</span>
                         <span class="nav-title-dynamic">Поиск подстроки</span>
                         <button class="open-lesson-btn-dynamic">Открыть</button>
                     </div>
                     
-                    <div class="lesson-nav-item-dynamic" data-lesson="string-modification">
+                    <div class="lesson-nav-item-dynamic" data-firebase-id="lesson-3-6">
                         <span class="nav-number-dynamic">7</span>
                         <span class="nav-title-dynamic">Изменение строки</span>
                         <button class="open-lesson-btn-dynamic">Открыть</button>
                     </div>
                     
-                    <div class="lesson-nav-item-dynamic" data-lesson="char-operations">
+                    <div class="lesson-nav-item-dynamic" data-firebase-id="lesson-3-7">
                         <span class="nav-number-dynamic">8</span>
                         <span class="nav-title-dynamic">Операции с символами</span>
                         <button class="open-lesson-btn-dynamic">Открыть</button>
                     </div>
                     
-                    <div class="lesson-nav-item-dynamic" data-lesson="word-count">
+                    <div class="lesson-nav-item-dynamic" data-firebase-id="lesson-3-8">
                         <span class="nav-number-dynamic">9</span>
                         <span class="nav-title-dynamic">Программа подсчета слов</span>
                         <button class="open-lesson-btn-dynamic">Открыть</button>
                     </div>
                     
-                    <div class="lesson-nav-item-dynamic" data-lesson="string-view">
+                    <div class="lesson-nav-item-dynamic" data-firebase-id="lesson-3-9">
                         <span class="nav-number-dynamic">10</span>
                         <span class="nav-title-dynamic">Тип std::string_view</span>
                         <button class="open-lesson-btn-dynamic">Открыть</button>
@@ -108,149 +109,116 @@
                 <div class="welcome-message">
                     <h2>👋 Добро пожаловать в урок по строкам!</h2>
                     <p>Выберите тему из списка слева, чтобы начать изучение работы со строками в C++.</p>
-                    <p>Весь контент загружается динамически без перезагрузки страницы.</p>
+                    <p>Контент загружается из Firebase...</p>
                 </div>
             </section>
         </div>
     </main>
 
-    <script>
-        // База данных с контентом уроков по строкам
-        const lessonsDatabase = {
-            'string-definition': {
-                title: 'Определение строк',
-                content: `
-                    <h1>Определение строк в C++</h1>
-                    <p>В C++ есть несколько способов работы со строками...</p>
+    <script type="module">
+        import { db } from './firebase.js';
+        import { doc, getDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+        // Глобальная переменная для хранения контента из Firebase
+        let firebaseLessonsContent = {};
+
+        const lessonIdMapping = {
+            'structure': 'lesson-3',
+        }
+        // Загружаем контент из Firebase при загрузке страницы
+        async function loadLessonContentFromFirebase() {
+            try {
+                console.log('🔄 Загружаем контент урока "Строки" из Firebase...');
+                
+                // Это файл index2-3.html - строки, используем уровень beginner
+                const lessonDoc = await getDoc(doc(db, 'lessons', 'beginner'));
+                
+                if (lessonDoc.exists()) {
+                    const lessons = lessonDoc.data().items;
                     
-                    <h2>Типы строк</h2>
-                    <ul>
-                        <li><strong>C-строки</strong> - массивы символов с нуль-терминатором</li>
-                        <li><strong>std::string</strong> - класс из стандартной библиотеки</li>
-                        <li><strong>std::wstring</strong> - для широких символов (Unicode)</li>
-                    </ul>
+                    // ЗАГРУЖАЕМ ВСЕ УРОКИ ИЗ FIREBASE
+                    lessons.forEach(lesson => {
+                        firebaseLessonsContent[lesson.id] = {
+                            title: lesson.title,
+                            content: lesson.content
+                        };
+                    });
                     
-                    <div class="code-block">
-                        <code>#include &lt;string&gt;\n\nint main() {\n    // C-строка\n    const char* cstr = "Hello C";\n    \n    // std::string\n    std::string str = "Hello C++";\n    std::string str2("Constructor");\n    \n    return 0;\n}</code>
-                    </div>
-                `
-            },
-            'unicode-strings': {
-                title: 'Строки с поддержкой Unicode',
-                content: `
-                    <h1>Строки с поддержкой Unicode</h1>
-                    <p>Для работы с Unicode в C++ используются специальные типы...</p>
+                    console.log('✅ Загружены уроки:', Object.keys(firebaseLessonsContent));
                     
-                    <h2>Unicode типы</h2>
-                    <ul>
-                        <li><strong>std::wstring</strong> - широкие строки</li>
-                        <li><strong>std::u16string</strong> - UTF-16 строки</li>
-                        <li><strong>std::u32string</strong> - UTF-32 строки</li>
-                        <li><strong>std::u8string</strong> - UTF-8 строки (C++20)</li>
-                    </ul>
-                    
-                    <div class="code-block">
-                        <code>#include &lt;string&gt;\n\nint main() {\n    std::wstring wstr = L"Привет Unicode";\n    std::u16string u16str = u"UTF-16 текст";\n    std::u32string u32str = U"UTF-32 текст";\n    \n    return 0;\n}</code>
-                    </div>
-                `
-            },
-            'type-conversion': {
-                title: 'Преобразование типов и строк',
-                content: `
-                    <h1>Преобразование типов и строк</h1>
-                    <p>C++ предоставляет различные способы преобразования между строками и другими типами...</p>
-                    
-                    <div class="code-block">
-                        <code>#include &lt;string&gt;\n#include &lt;sstream&gt;\n\nint main() {\n    // Число в строку\n    int number = 42;\n    std::string str = std::to_string(number);\n    \n    // Строка в число\n    std::string numStr = "123";\n    int num = std::stoi(numStr);\n    \n    // Использование stringstream\n    std::stringstream ss;\n    ss << "Value: " << 3.14;\n    std::string result = ss.str();\n    \n    return 0;\n}</code>
-                    </div>
-                `
-            },
-            'string-comparison': {
-                title: 'Сравнение строк',
-                content: `
-                    <h1>Сравнение строк</h1>
-                    <p>Сравнение строк в C++ можно выполнять различными способами...</p>
-                    
-                    <div class="code-block">
-                        <code>#include &lt;string&gt;\n#include &lt;iostream&gt;\n\nint main() {\n    std::string str1 = "apple";\n    std::string str2 = "banana";\n    \n    // Операторы сравнения\n    if (str1 == str2) {\n        std::cout << "Строки равны" << std::endl;\n    } else if (str1 < str2) {\n        std::cout << str1 << " меньше " << str2 << std::endl;\n    }\n    \n    // Метод compare\n    int result = str1.compare(str2);\n    if (result == 0) {\n        std::cout << "Строки равны" << std::endl;\n    } else if (result < 0) {\n        std::cout << str1 << " меньше " << str2 << std::endl;\n    }\n    \n    return 0;\n}</code>
-                    </div>
-                    <div class="code-block">
-                        <code>#include &lt;string&gt;\n#include &lt;iostream&gt;\n\nint main() {\n    std::string str1 = "apple";\n    std::string str2 = "banana";\n    \n    // Операторы сравнения\n    if (str1 == str2) {\n        std::cout << "Строки равны" << std::endl;\n    } else if (str1 < str2) {\n        std::cout << str1 << " меньше " << str2 << std::endl;\n    }\n    \n    // Метод compare\n    int result = str1.compare(str2);\n    if (result == 0) {\n        std::cout << "Строки равны" << std::endl;\n    } else if (result < 0) {\n        std::cout << str1 << " меньше " << str2 << std::endl;\n    }\n    \n    return 0;\n}</code>
-                    </div>
-                    <div class="code-block">
-                        <code>#include &lt;string&gt;\n#include &lt;iostream&gt;\n\nint main() {\n    std::string str1 = "apple";\n    std::string str2 = "banana";\n    \n    // Операторы сравнения\n    if (str1 == str2) {\n        std::cout << "Строки равны" << std::endl;\n    } else if (str1 < str2) {\n        std::cout << str1 << " меньше " << str2 << std::endl;\n    }\n    \n    // Метод compare\n    int result = str1.compare(str2);\n    if (result == 0) {\n        std::cout << "Строки равны" << std::endl;\n    } else if (result < 0) {\n        std::cout << str1 << " меньше " << str2 << std::endl;\n    }\n    \n    return 0;\n}</code>
-                    </div>
-                    <div class="code-block">
-                        <code>#include &lt;string&gt;\n#include &lt;iostream&gt;\n\nint main() {\n    std::string str1 = "apple";\n    std::string str2 = "banana";\n    \n    // Операторы сравнения\n    if (str1 == str2) {\n        std::cout << "Строки равны" << std::endl;\n    } else if (str1 < str2) {\n        std::cout << str1 << " меньше " << str2 << std::endl;\n    }\n    \n    // Метод compare\n    int result = str1.compare(str2);\n    if (result == 0) {\n        std::cout << "Строки равны" << std::endl;\n    } else if (result < 0) {\n        std::cout << str1 << " меньше " << str2 << std::endl;\n    }\n    \n    return 0;\n}</code>
-                    </div>
-                    <div class="code-block">
-                        <code>#include &lt;string&gt;\n#include &lt;iostream&gt;\n\nint main() {\n    std::string str1 = "apple";\n    std::string str2 = "banana";\n    \n    // Операторы сравнения\n    if (str1 == str2) {\n        std::cout << "Строки равны" << std::endl;\n    } else if (str1 < str2) {\n        std::cout << str1 << " меньше " << str2 << std::endl;\n    }\n    \n    // Метод compare\n    int result = str1.compare(str2);\n    if (result == 0) {\n        std::cout << "Строки равны" << std::endl;\n    } else if (result < 0) {\n        std::cout << str1 << " меньше " << str2 << std::endl;\n    }\n    \n    return 0;\n}</code>
-                    </div>
-                    <div class="code-block">
-                        <code>#include &lt;string&gt;\n#include &lt;iostream&gt;\n\nint main() {\n    std::string str1 = "apple";\n    std::string str2 = "banana";\n    \n    // Операторы сравнения\n    if (str1 == str2) {\n        std::cout << "Строки равны" << std::endl;\n    } else if (str1 < str2) {\n        std::cout << str1 << " меньше " << str2 << std::endl;\n    }\n    \n    // Метод compare\n    int result = str1.compare(str2);\n    if (result == 0) {\n        std::cout << "Строки равны" << std::endl;\n    } else if (result < 0) {\n        std::cout << str1 << " меньше " << str2 << std::endl;\n    }\n    \n    return 0;\n}</code>
-                    </div>
-                    <div class="code-block">
-                        <code>#include &lt;string&gt;\n#include &lt;iostream&gt;\n\nint main() {\n    std::string str1 = "apple";\n    std::string str2 = "banana";\n    \n    // Операторы сравнения\n    if (str1 == str2) {\n        std::cout << "Строки равны" << std::endl;\n    } else if (str1 < str2) {\n        std::cout << str1 << " меньше " << str2 << std::endl;\n    }\n    \n    // Метод compare\n    int result = str1.compare(str2);\n    if (result == 0) {\n        std::cout << "Строки равны" << std::endl;\n    } else if (result < 0) {\n        std::cout << str1 << " меньше " << str2 << std::endl;\n    }\n    \n    return 0;\n}</code>
-                    </div>
-                    <div class="code-block">
-                        <code>#include &lt;string&gt;\n#include &lt;iostream&gt;\n\nint main() {\n    std::string str1 = "apple";\n    std::string str2 = "banana";\n    \n    // Операторы сравнения\n    if (str1 == str2) {\n        std::cout << "Строки равны" << std::endl;\n    } else if (str1 < str2) {\n        std::cout << str1 << " меньше " << str2 << std::endl;\n    }\n    \n    // Метод compare\n    int result = str1.compare(str2);\n    if (result == 0) {\n        std::cout << "Строки равны" << std::endl;\n    } else if (result < 0) {\n        std::cout << str1 << " меньше " << str2 << std::endl;\n    }\n    \n    return 0;\n}</code>
-                    </div>
-                    <div class="code-block">
-                        <code>#include &lt;string&gt;\n#include &lt;iostream&gt;\n\nint main() {\n    std::string str1 = "apple";\n    std::string str2 = "banana";\n    \n    // Операторы сравнения\n    if (str1 == str2) {\n        std::cout << "Строки равны" << std::endl;\n    } else if (str1 < str2) {\n        std::cout << str1 << " меньше " << str2 << std::endl;\n    }\n    \n    // Метод compare\n    int result = str1.compare(str2);\n    if (result == 0) {\n        std::cout << "Строки равны" << std::endl;\n    } else if (result < 0) {\n        std::cout << str1 << " меньше " << str2 << std::endl;\n    }\n    \n    return 0;\n}</code>
-                    </div>
-                    <div class="code-block">
-                        <code>#include &lt;string&gt;\n#include &lt;iostream&gt;\n\nint main() {\n    std::string str1 = "apple";\n    std::string str2 = "banana";\n    \n    // Операторы сравнения\n    if (str1 == str2) {\n        std::cout << "Строки равны" << std::endl;\n    } else if (str1 < str2) {\n        std::cout << str1 << " меньше " << str2 << std::endl;\n    }\n    \n    // Метод compare\n    int result = str1.compare(str2);\n    if (result == 0) {\n        std::cout << "Строки равны" << std::endl;\n    } else if (result < 0) {\n        std::cout << str1 << " меньше " << str2 << std::endl;\n    }\n    \n    return 0;\n}</code>
-                    </div>
-                `
-            },
-            'substring-search': {
-                title: 'Поиск подстроки',
-                content: `
-                    <h1>Поиск подстроки</h1>
-                    <p>Поиск подстрок в C++ осуществляется с помощью методов find...</p>
-                    
-                    <div class="code-block">
-                        <code>#include &lt;string&gt;\n#include &lt;iostream&gt;\n\nint main() {\n    std::string text = "Hello world, welcome to C++ programming";\n    \n    // Поиск подстроки\n    size_t pos = text.find("world");\n    if (pos != std::string::npos) {\n        std::cout << "Найдено на позиции: " << pos << std::endl;\n    }\n    \n    // Поиск с конца\n    pos = text.rfind("o");\n    \n    // Поиск любого символа из набора\n    pos = text.find_first_of("aeiou");\n    \n    return 0;\n}</code>
-                    </div>
-                `
-            },
-            'word-count': {
-                title: 'Программа подсчета слов',
-                content: `
-                    <h1>Программа подсчета слов</h1>
-                    <p>Практический пример - программа для подсчета слов в тексте...</p>
-                    
-                    <div class="code-block">
-                        <code>#include &lt;string&gt;\n#include &lt;sstream&gt;\n#include &lt;iostream&gt;\n\nint countWords(const std::string& text) {\n    std::stringstream ss(text);\n    std::string word;\n    int count = 0;\n    \n    while (ss >> word) {\n        count++;\n    }\n    \n    return count;\n}\n\nint main() {\n    std::string text = "C++ is a powerful programming language";\n    int wordCount = countWords(text);\n    \n    std::cout << "Текст: " << text << std::endl;\n    std::cout << "Количество слов: " << wordCount << std::endl;\n    \n    return 0;\n}</code>
-                    </div>
-                `
-            },
-            'string-view': {
-                title: 'Тип std::string_view',
-                content: `
-                    <h1>Тип std::string_view</h1>
-                    <p>std::string_view - это легковесная неизменяемая ссылка на строку...</p>
-                    
-                    <div class="code-block">
-                        <code>#include &lt;string_view&gt;\n#include &lt;iostream&gt;\n\nvoid printString(std::string_view sv) {\n    std::cout << "Длина: " << sv.length() << std::endl;\n    std::cout << "Содержимое: " << sv << std::endl;\n}\n\nint main() {\n    std::string str = "Hello World";\n    const char* cstr = "C-string";\n    \n    // string_view из разных источников\n    std::string_view sv1 = str;\n    std::string_view sv2 = cstr;\n    std::string_view sv3 = "Literal";\n    \n    printString(sv1);\n    printString(sv2);\n    \n    // Подстроки string_view\n    std::string_view sub = sv1.substr(0, 5);\n    std::cout << "Подстрока: " << sub << std::endl;\n    \n    return 0;\n}</code>
-                    </div>
-                `
+                    // Автоматически открываем первый урок
+                    const firstLesson = document.querySelector('.lesson-nav-item-dynamic');
+                    if (firstLesson && Object.keys(firebaseLessonsContent).length > 0) {
+                        firstLesson.classList.add('active');
+                        const firstLessonFirebaseId = firstLesson.getAttribute('data-firebase-id');
+                        showLessonContent(firstLessonFirebaseId);
+                    }
+                } else {
+                    showError('Документ beginner не найден в Firebase');
+                }
+                
+            } catch (error) {
+                console.error('❌ Ошибка загрузки из Firebase:', error);
+                showError('Ошибка подключения к Firebase: ' + error.message);
             }
-        };
+        }
+
+        // Функция показа контента урока
+        function showLessonContent(firebaseLessonId) {
+            const lessonContent = document.getElementById('lessonContent');
+            
+            if (firebaseLessonsContent[firebaseLessonId]) {
+                const lesson = firebaseLessonsContent[firebaseLessonId];
+                
+                // Извлекаем только содержимое body
+                let cleanContent = lesson.content;
+                
+                // Удаляем внешние теги если они есть
+                const bodyMatch = lesson.content.match(/<body[^>]*>([\s\S]*?)<\/body>/i);
+                if (bodyMatch && bodyMatch[1]) {
+                    cleanContent = bodyMatch[1];
+                }
+                
+                // Также удаляем возможные style теги, оставшиеся в контенте
+                cleanContent = cleanContent.replace(/<style[^>]*>[\s\S]*?<\/style>/gi, '');
+                
+                lessonContent.innerHTML = `
+                    <div class="lesson-detail-content">
+                        ${cleanContent}
+                        <div class="lesson-meta">
+                            <small>Урок по работе со строками</small>
+                        </div>
+                    </div>
+                `;
+            } else {
+                // Если не нашли
+                showError(`Контент урока ${firebaseLessonId} не загружен из Firebase.`);
+            }
+        }
+
+        // Показ ошибки
+        function showError(message) {
+            const lessonContent = document.getElementById('lessonContent');
+            lessonContent.innerHTML = `
+                <div class="lesson-detail-content">
+                    <h2>❌ Ошибка загрузки</h2>
+                    <p>${message}</p>
+                    <p>Проверьте подключение к интернету и настройки Firebase.</p>
+                </div>
+            `;
+        }
 
         // Обработка кликов по кнопкам "Открыть"
         document.addEventListener('DOMContentLoaded', function() {
             const openButtons = document.querySelectorAll('.open-lesson-btn-dynamic');
-            const lessonContent = document.getElementById('lessonContent');
             
             openButtons.forEach(button => {
                 button.addEventListener('click', function() {
                     const lessonItem = this.closest('.lesson-nav-item-dynamic');
-                    const lessonId = lessonItem.getAttribute('data-lesson');
-                    const lessonTitle = lessonItem.querySelector('.nav-title-dynamic').textContent;
+                    const firebaseLessonId = lessonItem.getAttribute('data-firebase-id');
                     
                     // Показываем контент урока
-                    showLessonContent(lessonId, lessonTitle);
+                    showLessonContent(firebaseLessonId);
                     
                     // Подсвечиваем активный элемент
                     document.querySelectorAll('.lesson-nav-item-dynamic').forEach(item => {
@@ -260,40 +228,8 @@
                 });
             });
 
-            // Функция показа контента урока
-            function showLessonContent(lessonId, lessonTitle) {
-                if (lessonsDatabase[lessonId]) {
-                    const lesson = lessonsDatabase[lessonId];
-                    lessonContent.innerHTML = `
-                        <div class="lesson-detail-content">
-                            ${lesson.content}
-                            <div class="lesson-meta">
-                                <small>Урок по работе со строками</small>
-                            </div>
-                        </div>
-                    `;
-                } else {
-                    lessonContent.innerHTML = `
-                        <div class="lesson-detail-content">
-                            <h1>${lessonTitle}</h1>
-                            <p>Контент для этого урока пока не добавлен в базу данных.</p>
-                            <p>ID урока: <strong>${lessonId}</strong></p>
-                            <div class="code-block">
-                                <code>// Скоро здесь появится контент\n// Из Firebase базы данных</code>
-                            </div>
-                        </div>
-                    `;
-                }
-            }
-
-            // Автоматически открываем первый урок
-            const firstLesson = document.querySelector('.lesson-nav-item-dynamic');
-            if (firstLesson) {
-                firstLesson.classList.add('active');
-                const firstLessonId = firstLesson.getAttribute('data-lesson');
-                const firstLessonTitle = firstLesson.querySelector('.nav-title-dynamic').textContent;
-                showLessonContent(firstLessonId, firstLessonTitle);
-            }
+            // Загружаем контент из Firebase
+            loadLessonContentFromFirebase();
         });
     </script>
 </body>

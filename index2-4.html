@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Указатели - URcode</title>
     <link rel="stylesheet" href="styles.css">
+    <script type="module" src="firebase.js"></script>
 </head>
 <body>
     <!-- Навигация -->
@@ -40,31 +41,31 @@
                     <h3>Содержание урока</h3>
                     
                     <!-- Каждый пункт с кнопкой перехода -->
-                    <div class="lesson-nav-item-dynamic" data-lesson="what-are-pointers">
+                    <div class="lesson-nav-item-dynamic" data-firebase-id="lesson-5">
                         <span class="nav-number-dynamic">1</span>
                         <span class="nav-title-dynamic">Что такое указатели</span>
                         <button class="open-lesson-btn-dynamic">Открыть</button>
                     </div>
                     
-                    <div class="lesson-nav-item-dynamic" data-lesson="pointer-operations">
+                    <div class="lesson-nav-item-dynamic" data-firebase-id="lesson-5-1">
                         <span class="nav-number-dynamic">2</span>
                         <span class="nav-title-dynamic">Операции с указателями</span>
                         <button class="open-lesson-btn-dynamic">Открыть</button>
                     </div>
                     
-                    <div class="lesson-nav-item-dynamic" data-lesson="pointer-arithmetic">
+                    <div class="lesson-nav-item-dynamic" data-firebase-id="lesson-5-2">
                         <span class="nav-number-dynamic">3</span>
                         <span class="nav-title-dynamic">Арифметика указателей</span>
                         <button class="open-lesson-btn-dynamic">Открыть</button>
                     </div>
                     
-                    <div class="lesson-nav-item-dynamic" data-lesson="const-pointers">
+                    <div class="lesson-nav-item-dynamic" data-firebase-id="lesson-5-3">
                         <span class="nav-number-dynamic">4</span>
                         <span class="nav-title-dynamic">Константы и указатели</span>
                         <button class="open-lesson-btn-dynamic">Открыть</button>
                     </div>
                     
-                    <div class="lesson-nav-item-dynamic" data-lesson="pointers-arrays">
+                    <div class="lesson-nav-item-dynamic" data-firebase-id="lesson-5-4">
                         <span class="nav-number-dynamic">5</span>
                         <span class="nav-title-dynamic">Указатели и массивы</span>
                         <button class="open-lesson-btn-dynamic">Открыть</button>
@@ -84,125 +85,143 @@
         </div>
     </main>
 
-    <script>
-        // База данных с контентом уроков по указателям
-        const lessonsDatabase = {
-            'what-are-pointers': {
-                title: 'Что такое указатели',
-                content: `
-                    <h1>Что такое указатели</h1>
-                    <p>Указатели - это переменные, которые хранят адреса памяти других переменных. Это одна из самых мощных возможностей C++!</p>
-                    
-                    <h2>Основные понятия</h2>
-                    <ul>
-                        <li><strong>Адрес памяти</strong> - уникальный идентификатор ячейки памяти</li>
-                        <li><strong>Указатель</strong> - переменная, хранящая адрес</li>
-                        <li><strong>Разыменование</strong> - получение значения по адресу</li>
-                    </ul>
-                    
-                    <div class="code-block">
-                        <code>#include &lt;iostream&gt;\n\nint main() {\n    int number = 42;\n    int* pointer = &number; // & - оператор взятия адреса\n    \n    std::cout << "Значение: " << number << std::endl;\n    std::cout << "Адрес: " << pointer << std::endl;\n    std::cout << "Значение через указатель: " << *pointer << std::endl;\n    \n    return 0;\n}</code>
-                    </div>
-                    
-                    <h2>Объявление указателей</h2>
-                    <div class="code-block">
-                        <code>int* ptr1;     // Указатель на int\ndouble* ptr2; // Указатель на double\nchar* ptr3;   // Указатель на char</code>
-                    </div>
-                `
-            },
-            'pointer-operations': {
-                title: 'Операции с указателями',
-                content: `
-                    <h1>Операции с указателями</h1>
-                    <p>С указателями можно выполнять различные операции для работы с памятью...</p>
-                    
-                    <h2>Основные операции</h2>
-                    <ul>
-                        <li><strong>&</strong> - взятие адреса переменной</li>
-                        <li><strong>*</strong> - разыменование (получение значения)</li>
-                        <li><strong>-></strong> - доступ к членам через указатель</li>
-                    </ul>
-                    
-                    <div class="code-block">
-                        <code>#include &lt;iostream&gt;\n\nstruct Point {\n    int x, y;\n};\n\nint main() {\n    int value = 100;\n    int* ptr = &value;\n    \n    // Разыменование\n    *ptr = 200;\n    std::cout << "Новое значение: " << value << std::endl;\n    \n    // Работа со структурой\n    Point p = {10, 20};\n    Point* pPtr = &p;\n    \n    // Доступ через ->\n    pPtr->x = 30;\n    std::cout << "Координата X: " << p.x << std::endl;\n    \n    return 0;\n}</code>
-                    </div>
-                `
-            },
-            'pointer-arithmetic': {
-                title: 'Арифметика указателей',
-                content: `
-                    <h1>Арифметика указателей</h1>
-                    <p>Указатели поддерживают арифметические операции для навигации по памяти...</p>
-                    
-                    <h2>Операции с указателями</h2>
-                    <ul>
-                        <li><strong>++</strong> - переход к следующему элементу</li>
-                        <li><strong>--</strong> - переход к предыдущему элементу</li>
-                        <li><strong>+ N</strong> - смещение на N элементов вперед</li>
-                        <li><strong>- N</strong> - смещение на N элементов назад</li>
-                    </ul>
-                    
-                    <div class="code-block">
-                        <code>#include &lt;iostream&gt;\n\nint main() {\n    int arr[5] = {10, 20, 30, 40, 50};\n    int* ptr = arr; // ptr указывает на первый элемент\n    \n    std::cout << "Первый элемент: " << *ptr << std::endl;\n    \n    ptr++; // Переход ко второму элементу\n    std::cout << "Второй элемент: " << *ptr << std::endl;\n    \n    ptr += 2; // Переход к четвертому элементу\n    std::cout << "Четвертый элемент: " << *ptr << std::endl;\n    \n    // Разность указателей\n    int* start = arr;\n    int* end = arr + 5;\n    std::cout << "Количество элементов: " << (end - start) << std::endl;\n    \n    return 0;\n}</code>
-                    </div>
-                `
-            },
-            'const-pointers': {
-                title: 'Константы и указатели',
-                content: `
-                    <h1>Константы и указатели</h1>
-                    <p>Сочетание const с указателями создает несколько вариантов защиты данных...</p>
-                    
-                    <h2>Типы константных указателей</h2>
-                    <ul>
-                        <li><strong>const int*</strong> - указатель на константу</li>
-                        <li><strong>int* const</strong> - константный указатель</li>
-                        <li><strong>const int* const</strong> - константный указатель на константу</li>
-                    </ul>
-                    
-                    <div class="code-block">
-                        <code>#include &lt;iostream&gt;\n\nint main() {\n    int a = 10, b = 20;\n    \n    // Указатель на константу\n    const int* ptr1 = &a;\n    // *ptr1 = 30; // Ошибка! Нельзя изменить значение\n    ptr1 = &b;     // Но можно изменить адрес\n    \n    // Константный указатель\n    int* const ptr2 = &a;\n    *ptr2 = 30;    // Можно изменить значение\n    // ptr2 = &b;  // Ошибка! Нельзя изменить адрес\n    \n    // Константный указатель на константу\n    const int* const ptr3 = &a;\n    // *ptr3 = 40; // Ошибка! Нельзя изменить значение\n    // ptr3 = &b;  // Ошибка! Нельзя изменить адрес\n    \n    std::cout << "a = " << a << std::endl;\n    return 0;\n}</code>
-                    </div>
-                `
-            },
-            'pointers-arrays': {
-                title: 'Указатели и массивы',
-                content: `
-                    <h1>Указатели и массивы</h1>
-                    <p>В C++ массивы тесно связаны с указателями. Имя массива - это указатель на его первый элемент.</p>
-                    
-                    <h2>Связь массивов и указателей</h2>
-                    <ul>
-                        <li>arr[i] эквивалентно *(arr + i)</li>
-                        <li>&arr[0] эквивалентно arr</li>
-                        <li>Массивы передаются в функции по указателю</li>
-                    </ul>
-                    
-                    <div class="code-block">
-                        <code>#include &lt;iostream&gt;\n\nvoid printArray(int* arr, int size) {\n    for (int i = 0; i < size; i++) {\n        std::cout << arr[i] << " ";\n    }\n    std::cout << std::endl;\n}\n\nint main() {\n    int numbers[5] = {1, 2, 3, 4, 5};\n    \n    // Разные способы доступа к элементам\n    std::cout << "numbers[2]: " << numbers[2] << std::endl;\n    std::cout << "*(numbers + 2): " << *(numbers + 2) << std::endl;\n    \n    // Указатель на массив\n    int* ptr = numbers;\n    std::cout << "ptr[3]: " << ptr[3] << std::endl;\n    \n    // Передача в функцию\n    printArray(numbers, 5);\n    \n    return 0;\n}</code>
-                    </div>
-                    
-                    <h2>Многомерные массивы</h2>
-                    <div class="code-block">
-                        <code>int matrix[2][3] = {{1, 2, 3}, {4, 5, 6}};\nint (*ptr)[3] = matrix; // Указатель на массив из 3 элементов\n\nstd::cout << "matrix[1][2]: " << matrix[1][2] << std::endl;\nstd::cout << "ptr[1][2]: " << ptr[1][2] << std::endl;</code>
-                    </div>
-                `
-            }
+    <script type="module">
+        import { db } from './firebase.js';
+        import { doc, getDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+        // Глобальная переменная для хранения контента из Firebase
+        let firebaseLessonsContent = {};
+
+        // Маппинг (если нужен)
+        const lessonIdMapping = {
+            'what-are-pointers': 'lesson-5',
+            'pointer-operations': 'lesson-5-1',
+            'pointer-arithmetic': 'lesson-5-2',
+            'const-pointers': 'lesson-5-3',
+            'pointers-arrays': 'lesson-5-4'
         };
+
+        // Загружаем контент из Firebase при загрузке страницы
+        async function loadLessonContentFromFirebase() {
+            try {
+                console.log('🔄 Загружаем контент урока "Указатели" из Firebase...');
+                
+                // ВАЖНО: Это файл index2-4.html - указатели, используем уровень intermediate
+                const lessonDoc = await getDoc(doc(db, 'lessons', 'intermediate'));
+                
+                if (lessonDoc.exists()) {
+                    const lessons = lessonDoc.data().items;
+                    
+                    // ЗАГРУЖАЕМ ВСЕ УРОКИ ИЗ FIREBASE
+                    lessons.forEach(lesson => {
+                        firebaseLessonsContent[lesson.id] = {
+                            title: lesson.title,
+                            content: lesson.content,
+                            order: lesson.order || 0
+                        };
+                    });
+                    
+                    console.log('✅ Загружены уроки:', Object.keys(firebaseLessonsContent));
+                    
+                    // Автоматически открываем первый урок
+                    const firstLesson = document.querySelector('.lesson-nav-item-dynamic');
+                    if (firstLesson && Object.keys(firebaseLessonsContent).length > 0) {
+                        firstLesson.classList.add('active');
+                        const firstLessonFirebaseId = firstLesson.getAttribute('data-firebase-id');
+                        showLessonContent(firstLessonFirebaseId);
+                    }
+                } else {
+                    showError('Документ intermediate не найден в Firebase');
+                }
+                
+            } catch (error) {
+                console.error('❌ Ошибка загрузки из Firebase:', error);
+                showError('Ошибка подключения к Firebase: ' + error.message);
+            }
+        }
+
+        // Функция показа контента урока
+        function showLessonContent(firebaseLessonId) {
+            const lessonContent = document.getElementById('lessonContent');
+            
+            if (firebaseLessonsContent[firebaseLessonId]) {
+                const lesson = firebaseLessonsContent[firebaseLessonId];
+                
+                // Извлекаем только содержимое body
+                let cleanContent = lesson.content;
+                
+                // Удаляем внешние теги если они есть
+                const bodyMatch = lesson.content.match(/<body[^>]*>([\s\S]*?)<\/body>/i);
+                if (bodyMatch && bodyMatch[1]) {
+                    cleanContent = bodyMatch[1];
+                }
+                
+                // Также удаляем возможные style теги, оставшиеся в контенте
+                cleanContent = cleanContent.replace(/<style[^>]*>[\s\S]*?<\/style>/gi, '');
+                
+                lessonContent.innerHTML = `
+                    <div class="lesson-detail-content">
+                        ${cleanContent}
+                        <div class="lesson-meta">
+                            <small>Урок по указателям в C++ (Средний уровень)</small>
+                        </div>
+                    </div>
+                `;
+            } else {
+                // Пробуем найти урок по маппингу
+                for (const [displayId, fbId] of Object.entries(lessonIdMapping)) {
+                    if (fbId === firebaseLessonId && firebaseLessonsContent[fbId]) {
+                        // Нашли через маппинг
+                        const lesson = firebaseLessonsContent[fbId];
+                        let cleanContent = lesson.content;
+                        
+                        const bodyMatch = lesson.content.match(/<body[^>]*>([\s\S]*?)<\/body>/i);
+                        if (bodyMatch && bodyMatch[1]) {
+                            cleanContent = bodyMatch[1];
+                        }
+                        
+                        cleanContent = cleanContent.replace(/<style[^>]*>[\s\S]*?<\/style>/gi, '');
+                        
+                        lessonContent.innerHTML = `
+                            <div class="lesson-detail-content">
+                                ${cleanContent}
+                                <div class="lesson-meta">
+                                    <small>Урок по указателям в C++ (Средний уровень)</small>
+                                </div>
+                            </div>
+                        `;
+                        return;
+                    }
+                }
+                
+                // Если не нашли
+                showError(`Контент урока ${firebaseLessonId} не загружен из Firebase.`);
+            }
+        }
+
+        // Показ ошибки
+        function showError(message) {
+            const lessonContent = document.getElementById('lessonContent');
+            lessonContent.innerHTML = `
+                <div class="lesson-detail-content">
+                    <h2>❌ Ошибка загрузки</h2>
+                    <p>${message}</p>
+                    <p>Проверьте подключение к интернету и настройки Firebase.</p>
+                </div>
+            `;
+        }
 
         // Обработка кликов по кнопкам "Открыть"
         document.addEventListener('DOMContentLoaded', function() {
             const openButtons = document.querySelectorAll('.open-lesson-btn-dynamic');
-            const lessonContent = document.getElementById('lessonContent');
             
             openButtons.forEach(button => {
                 button.addEventListener('click', function() {
                     const lessonItem = this.closest('.lesson-nav-item-dynamic');
-                    const lessonId = lessonItem.getAttribute('data-lesson');
-                    const lessonTitle = lessonItem.querySelector('.nav-title-dynamic').textContent;
+                    const firebaseLessonId = lessonItem.getAttribute('data-firebase-id');
                     
                     // Показываем контент урока
-                    showLessonContent(lessonId, lessonTitle);
+                    showLessonContent(firebaseLessonId);
                     
                     // Подсвечиваем активный элемент
                     document.querySelectorAll('.lesson-nav-item-dynamic').forEach(item => {
@@ -212,40 +231,8 @@
                 });
             });
 
-            // Функция показа контента урока
-            function showLessonContent(lessonId, lessonTitle) {
-                if (lessonsDatabase[lessonId]) {
-                    const lesson = lessonsDatabase[lessonId];
-                    lessonContent.innerHTML = `
-                        <div class="lesson-detail-content">
-                            ${lesson.content}
-                            <div class="lesson-meta">
-                                <small>Урок по указателям в C++</small>
-                            </div>
-                        </div>
-                    `;
-                } else {
-                    lessonContent.innerHTML = `
-                        <div class="lesson-detail-content">
-                            <h1>${lessonTitle}</h1>
-                            <p>Контент для этого урока пока не добавлен в базу данных.</p>
-                            <p>ID урока: <strong>${lessonId}</strong></p>
-                            <div class="code-block">
-                                <code>// Скоро здесь появится контент\n// Из Firebase базы данных</code>
-                            </div>
-                        </div>
-                    `;
-                }
-            }
-
-            // Автоматически открываем первый урок
-            const firstLesson = document.querySelector('.lesson-nav-item-dynamic');
-            if (firstLesson) {
-                firstLesson.classList.add('active');
-                const firstLessonId = firstLesson.getAttribute('data-lesson');
-                const firstLessonTitle = firstLesson.querySelector('.nav-title-dynamic').textContent;
-                showLessonContent(firstLessonId, firstLessonTitle);
-            }
+            // Загружаем контент из Firebase
+            loadLessonContentFromFirebase();
         });
     </script>
 </body>

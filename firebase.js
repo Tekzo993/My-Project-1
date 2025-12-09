@@ -3,12 +3,12 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebas
 import { getFirestore } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
 const firebaseConfig = {
-    apiKey: "AIzaSyBT_ilkjNnf-JSZrt-PYjlPRLmNnE7IpvQ",
-    authDomain: "lessions-26a88.firebaseapp.com",
-    projectId: "lessions-26a88",
-    storageBucket: "lessions-26a88.firebasestorage.app",
-    messagingSenderId: "1008577117048",
-    appId: "1:1008577117048:web:4b3bb1b32cfeee4696a68d"
+    apiKey: "AIzaSyCTccvzs87BV1DTv4w7bdE_FY7LcLs0SXQ",
+    authDomain: "lession-8d125.firebaseapp.com",
+    projectId: "lession-8d125",
+    storageBucket: "lession-8d125.firebasestorage.app",
+    messagingSenderId: "281858885118",
+    appId: "1:281858885118:web:db93e6a63e5ed7c13e6caf"
 };
 
 const app = initializeApp(firebaseConfig);

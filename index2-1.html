@@ -5,9 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>URcode - Основы языка</title>
     <link rel="stylesheet" href="styles.css">
+    <script type="module" src="firebase.js"></script>
 </head>
 <body>
-    <!-- Навигация -->
+    <!-- Навигация (без изменений) -->
     <nav class="navbar">
         <div class="nav-container">
             <div class="logo">URcode</div>
@@ -39,110 +40,111 @@
                 <div class="lesson-nav-dynamic">
                     <h3>Содержание урока</h3>
                     
-                    <!-- Каждый пункт с кнопкой перехода -->
-                    <div class="lesson-nav-item-dynamic" data-lesson="structure">
+                    <!-- 18 уроков по основам языка -->
+                    <!-- Обрати внимание: data-lesson содержит понятные имена для навигации -->
+                    <div class="lesson-nav-item-dynamic" data-lesson="structure" data-firebase-id="lesson-2">
                         <span class="nav-number-dynamic">1</span>
                         <span class="nav-title-dynamic">Структура программы</span>
                         <button class="open-lesson-btn-dynamic">Открыть</button>
                     </div>
                     
-                    <div class="lesson-nav-item-dynamic" data-lesson="variables">
+                    <div class="lesson-nav-item-dynamic" data-lesson="variables" data-firebase-id="lesson-2-1">
                         <span class="nav-number-dynamic">2</span>
                         <span class="nav-title-dynamic">Переменные</span>
                         <button class="open-lesson-btn-dynamic">Открыть</button>
                     </div>
                     
-                    <div class="lesson-nav-item-dynamic" data-lesson="data-types">
+                    <div class="lesson-nav-item-dynamic" data-lesson="data-types" data-firebase-id="lesson-2-2">
                         <span class="nav-number-dynamic">3</span>
                         <span class="nav-title-dynamic">Типы данных</span>
                         <button class="open-lesson-btn-dynamic">Открыть</button>
                     </div>
                     
-                    <div class="lesson-nav-item-dynamic" data-lesson="constants">
+                    <div class="lesson-nav-item-dynamic" data-lesson="constants" data-firebase-id="lesson-2-3">
                         <span class="nav-number-dynamic">4</span>
                         <span class="nav-title-dynamic">Константы</span>
                         <button class="open-lesson-btn-dynamic">Открыть</button>
                     </div>
                     
-                    <div class="lesson-nav-item-dynamic" data-lesson="io">
+                    <div class="lesson-nav-item-dynamic" data-lesson="io" data-firebase-id="lesson-2-4">
                         <span class="nav-number-dynamic">5</span>
                         <span class="nav-title-dynamic">Консольный ввод-вывод</span>
                         <button class="open-lesson-btn-dynamic">Открыть</button>
                     </div>
                     
-                    <div class="lesson-nav-item-dynamic" data-lesson="namespaces">
+                    <div class="lesson-nav-item-dynamic" data-lesson="namespaces" data-firebase-id="lesson-2-5">
                         <span class="nav-number-dynamic">6</span>
                         <span class="nav-title-dynamic">using. Пространства имен</span>
                         <button class="open-lesson-btn-dynamic">Открыть</button>
                     </div>
                     
-                    <div class="lesson-nav-item-dynamic" data-lesson="arithmetic">
+                    <div class="lesson-nav-item-dynamic" data-lesson="arithmetic" data-firebase-id="lesson-2-6">
                         <span class="nav-number-dynamic">7</span>
                         <span class="nav-title-dynamic">Арифметические операции</span>
                         <button class="open-lesson-btn-dynamic">Открыть</button>
                     </div>
                     
-                    <div class="lesson-nav-item-dynamic" data-lesson="typing">
+                    <div class="lesson-nav-item-dynamic" data-lesson="typing" data-firebase-id="lesson-2-7">
                         <span class="nav-number-dynamic">8</span>
                         <span class="nav-title-dynamic">Статическая типизация</span>
                         <button class="open-lesson-btn-dynamic">Открыть</button>
                     </div>
                     
-                    <div class="lesson-nav-item-dynamic" data-lesson="assignment">
+                    <div class="lesson-nav-item-dynamic" data-lesson="assignment" data-firebase-id="lesson-2-8">
                         <span class="nav-number-dynamic">9</span>
                         <span class="nav-title-dynamic">Операции присваивания</span>
                         <button class="open-lesson-btn-dynamic">Открыть</button>
                     </div>
                     
-                    <div class="lesson-nav-item-dynamic" data-lesson="conditions">
+                    <div class="lesson-nav-item-dynamic" data-lesson="conditions" data-firebase-id="lesson-2-9">
                         <span class="nav-number-dynamic">10</span>
                         <span class="nav-title-dynamic">Условные Выражения</span>
                         <button class="open-lesson-btn-dynamic">Открыть</button>
                     </div>
                     
-                    <div class="lesson-nav-item-dynamic" data-lesson="if-else">
+                    <div class="lesson-nav-item-dynamic" data-lesson="if-else" data-firebase-id="lesson-2-10">
                         <span class="nav-number-dynamic">11</span>
                         <span class="nav-title-dynamic">Конструкция if-else</span>
                         <button class="open-lesson-btn-dynamic">Открыть</button>
                     </div>
                     
-                    <div class="lesson-nav-item-dynamic" data-lesson="switch-case">
+                    <div class="lesson-nav-item-dynamic" data-lesson="switch-case" data-firebase-id="lesson-2-11">
                         <span class="nav-number-dynamic">12</span>
                         <span class="nav-title-dynamic">Конструкция switch-case</span>
                         <button class="open-lesson-btn-dynamic">Открыть</button>
                     </div>
                     
-                    <div class="lesson-nav-item-dynamic" data-lesson="loops">
+                    <div class="lesson-nav-item-dynamic" data-lesson="loops" data-firebase-id="lesson-2-12">
                         <span class="nav-number-dynamic">13</span>
                         <span class="nav-title-dynamic">Циклы</span>
                         <button class="open-lesson-btn-dynamic">Открыть</button>
                     </div>
                     
-                    <div class="lesson-nav-item-dynamic" data-lesson="references">
+                    <div class="lesson-nav-item-dynamic" data-lesson="references" data-firebase-id="lesson-2-13">
                         <span class="nav-number-dynamic">14</span>
                         <span class="nav-title-dynamic">Ссылки</span>
                         <button class="open-lesson-btn-dynamic">Открыть</button>
                     </div>
                     
-                    <div class="lesson-nav-item-dynamic" data-lesson="arrays">
+                    <div class="lesson-nav-item-dynamic" data-lesson="arrays" data-firebase-id="lesson-2-14">
                         <span class="nav-number-dynamic">15</span>
                         <span class="nav-title-dynamic">Массивы</span>
                         <button class="open-lesson-btn-dynamic">Открыть</button>
                     </div>
                     
-                    <div class="lesson-nav-item-dynamic" data-lesson="multiarrays">
+                    <div class="lesson-nav-item-dynamic" data-lesson="multiarrays" data-firebase-id="lesson-2-15">
                         <span class="nav-number-dynamic">16</span>
                         <span class="nav-title-dynamic">Многомерные массивы</span>
                         <button class="open-lesson-btn-dynamic">Открыть</button>
                     </div>
                     
-                    <div class="lesson-nav-item-dynamic" data-lesson="char-arrays">
+                    <div class="lesson-nav-item-dynamic" data-lesson="char-arrays" data-firebase-id="lesson-2-16">
                         <span class="nav-number-dynamic">17</span>
                         <span class="nav-title-dynamic">Массивы символов</span>
                         <button class="open-lesson-btn-dynamic">Открыть</button>
                     </div>
                     
-                    <div class="lesson-nav-item-dynamic" data-lesson="strings">
+                    <div class="lesson-nav-item-dynamic" data-lesson="strings" data-firebase-id="lesson-2-17">
                         <span class="nav-number-dynamic">18</span>
                         <span class="nav-title-dynamic">Введение в строки</span>
                         <button class="open-lesson-btn-dynamic">Открыть</button>
@@ -154,60 +156,163 @@
             <section class="lesson-content-dynamic" id="lessonContent">
                 <!-- Контент будет загружаться сюда динамически -->
                 <div class="welcome-message">
-                    <h2>👋 Добро пожаловать!</h2>
+                    <h2>👋 Добро пожаловать в основы языка C++!</h2>
                     <p>Выберите тему из списка слева, чтобы начать изучение.</p>
-                    <p>Весь контент загружается динамически без перезагрузки страницы.</p>
+                    <p>Контент загружается из Firebase...</p>
                 </div>
             </section>
         </div>
     </main>
 
-    <script>
-        // База данных с контентом уроков (в будущем заменится на Firebase)
-        const lessonsDatabase = {
-            'structure': {
-                title: 'Структура программы',
-                content: `
-                    <h1>Структура программы на C++</h1>
-                    <p>Каждая программа на C++ состоит из основных элементов...</p>
-                    <div class="code-block">
-                        <code>#include &lt;iostream&gt;\n\nint main() {\n    std::cout << "Hello World!";\n    return 0;\n}</code>
-                    </div>
-                `
-            },
-            'variables': {
-                title: 'Переменные',
-                content: `
-                    <h1>Переменные в C++</h1>
-                    <p>Переменные используются для хранения данных в программе...</p>
-                    <div class="code-block">
-                        <code>int age = 25;\ndouble price = 19.99;\nchar grade = 'A';</code>
-                    </div>
-                `
-            },
-            'data-types': {
-                title: 'Типы данных',
-                content: `
-                    <h1>Типы данных в C++</h1>
-                    <p>C++ поддерживает различные типы данных для разных целей...</p>
-                `
-            }
-            // Добавь остальные уроки по аналогии...
+    <script type="module">
+        import { db } from './firebase.js';
+        import { doc, getDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+        // Глобальная переменная для хранения контента из Firebase
+        let firebaseLessonsContent = {};
+
+        // Маппинг: понятное имя → ID в Firebase
+        const lessonIdMapping = {
+            'structure': 'lesson-2',
+            'variables': 'lesson-2-1',
+            'data-types': 'lesson-2-2',
+            'constants': 'lesson-2-3',
+            'io': 'lesson-2-4',
+            'namespaces': 'lesson-2-5',
+            'arithmetic': 'lesson-2-6',
+            'typing': 'lesson-2-7',
+            'assignment': 'lesson-2-8',
+            'conditions': 'lesson-2-9',
+            'if-else': 'lesson-2-10',
+            'switch-case': 'lesson-2-11',
+            'loops': 'lesson-2-12',
+            'references': 'lesson-2-13',
+            'arrays': 'lesson-2-14',
+            'multiarrays': 'lesson-2-15',
+            'char-arrays': 'lesson-2-16',
+            'strings': 'lesson-2-17'
         };
+
+        // Загружаем контент из Firebase при загрузке страницы
+        async function loadLessonContentFromFirebase() {
+            try {
+                console.log('🔄 Загружаем контент урока "Основы языка" из Firebase...');
+                
+                // Это файл index2-1.html - основы языка, используем уровень beginner
+                const lessonDoc = await getDoc(doc(db, 'lessons', 'beginner'));
+                
+                if (lessonDoc.exists()) {
+                    const lessons = lessonDoc.data().items;
+                    
+                    // ЗАГРУЖАЕМ ВСЕ УРОКИ ИЗ FIREBASE
+                    lessons.forEach(lesson => {
+                        firebaseLessonsContent[lesson.id] = {
+                            title: lesson.title,
+                            content: lesson.content
+                        };
+                    });
+                    
+                    console.log('✅ Загружены уроки:', Object.keys(firebaseLessonsContent));
+                    
+                    // Автоматически открываем первый урок
+                    const firstLesson = document.querySelector('.lesson-nav-item-dynamic');
+                    if (firstLesson && Object.keys(firebaseLessonsContent).length > 0) {
+                        firstLesson.classList.add('active');
+                        const firstLessonFirebaseId = firstLesson.getAttribute('data-firebase-id');
+                        showLessonContent(firstLessonFirebaseId);
+                    }
+                } else {
+                    showError('Документ beginner не найден в Firebase');
+                }
+                
+            } catch (error) {
+                console.error('❌ Ошибка загрузки из Firebase:', error);
+                showError('Ошибка подключения к Firebase: ' + error.message);
+            }
+        }
+
+        // Функция показа контента урока
+        function showLessonContent(firebaseLessonId) {
+            const lessonContent = document.getElementById('lessonContent');
+            
+            if (firebaseLessonsContent[firebaseLessonId]) {
+                const lesson = firebaseLessonsContent[firebaseLessonId];
+                
+                // Извлекаем только содержимое body
+                let cleanContent = lesson.content;
+                
+                // Удаляем внешние теги если они есть
+                const bodyMatch = lesson.content.match(/<body[^>]*>([\s\S]*?)<\/body>/i);
+                if (bodyMatch && bodyMatch[1]) {
+                    cleanContent = bodyMatch[1];
+                }
+                
+                // Также удаляем возможные style теги, оставшиеся в контенте
+                cleanContent = cleanContent.replace(/<style[^>]*>[\s\S]*?<\/style>/gi, '');
+                
+                lessonContent.innerHTML = `
+                    <div class="lesson-detail-content">
+                        ${cleanContent}
+                        <div class="lesson-meta">
+                            <small>Контент загружен из базы данных</small>
+                        </div>
+                    </div>
+                `;
+            } else {
+                // Пробуем найти урок по маппингу
+                for (const [displayId, fbId] of Object.entries(lessonIdMapping)) {
+                    if (fbId === firebaseLessonId && firebaseLessonsContent[fbId]) {
+                        // Нашли через маппинг
+                        const lesson = firebaseLessonsContent[fbId];
+                        let cleanContent = lesson.content;
+                        
+                        const bodyMatch = lesson.content.match(/<body[^>]*>([\s\S]*?)<\/body>/i);
+                        if (bodyMatch && bodyMatch[1]) {
+                            cleanContent = bodyMatch[1];
+                        }
+                        
+                        cleanContent = cleanContent.replace(/<style[^>]*>[\s\S]*?<\/style>/gi, '');
+                        
+                        lessonContent.innerHTML = `
+                            <div class="lesson-detail-content">
+                                ${cleanContent}
+                                <div class="lesson-meta">
+                                    <small>Контент загружен из базы данных</small>
+                                </div>
+                            </div>
+                        `;
+                        return;
+                    }
+                }
+                
+                // Если не нашли
+                showError(`Контент урока ${firebaseLessonId} не загружен.`);
+            }
+        }
+
+        // Показ ошибки
+        function showError(message) {
+            const lessonContent = document.getElementById('lessonContent');
+            lessonContent.innerHTML = `
+                <div class="lesson-detail-content">
+                    <h2>❌ Ошибка загрузки</h2>
+                    <p>${message}</p>
+                    <p>Проверьте подключение к интернету и настройки Firebase.</p>
+                </div>
+            `;
+        }
 
         // Обработка кликов по кнопкам "Открыть"
         document.addEventListener('DOMContentLoaded', function() {
             const openButtons = document.querySelectorAll('.open-lesson-btn-dynamic');
-            const lessonContent = document.getElementById('lessonContent');
             
             openButtons.forEach(button => {
                 button.addEventListener('click', function() {
                     const lessonItem = this.closest('.lesson-nav-item-dynamic');
-                    const lessonId = lessonItem.getAttribute('data-lesson');
-                    const lessonTitle = lessonItem.querySelector('.nav-title-dynamic').textContent;
+                    const firebaseLessonId = lessonItem.getAttribute('data-firebase-id');
                     
                     // Показываем контент урока
-                    showLessonContent(lessonId, lessonTitle);
+                    showLessonContent(firebaseLessonId);
                     
                     // Подсвечиваем активный элемент
                     document.querySelectorAll('.lesson-nav-item-dynamic').forEach(item => {
@@ -217,42 +322,8 @@
                 });
             });
 
-            // Функция показа контента урока
-            function showLessonContent(lessonId, lessonTitle) {
-                // Проверяем есть ли урок в базе
-                if (lessonsDatabase[lessonId]) {
-                    const lesson = lessonsDatabase[lessonId];
-                    lessonContent.innerHTML = `
-                        <div class="lesson-detail-content">
-                            ${lesson.content}
-                            <div class="lesson-meta">
-                                <small>Урок загружен из базы данных</small>
-                            </div>
-                        </div>
-                    `;
-                } else {
-                    // Если урока нет в базе (заглушка)
-                    lessonContent.innerHTML = `
-                        <div class="lesson-detail-content">
-                            <h1>${lessonTitle}</h1>
-                            <p>Контент для этого урока пока не добавлен в базу данных.</p>
-                            <p>ID урока: <strong>${lessonId}</strong></p>
-                            <div class="code-block">
-                                <code>// Скоро здесь появится контент\n// Из Firebase базы данных</code>
-                            </div>
-                        </div>
-                    `;
-                }
-            }
-
-            // Автоматически открываем первый урок
-            const firstLesson = document.querySelector('.lesson-nav-item-dynamic');
-            if (firstLesson) {
-                firstLesson.classList.add('active');
-                const firstLessonId = firstLesson.getAttribute('data-lesson');
-                const firstLessonTitle = firstLesson.querySelector('.nav-title-dynamic').textContent;
-                showLessonContent(firstLessonId, firstLessonTitle);
-            }
+            // Загружаем контент из Firebase
+            loadLessonContentFromFirebase();
         });
     </script>
 </body>

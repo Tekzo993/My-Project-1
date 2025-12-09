@@ -41,13 +41,13 @@
                     <h3>Содержание урока</h3>
                     
                     <!-- 2 урока -->
-                    <div class="lesson-nav-item-dynamic" data-lesson="lesson-2">
+                    <div class="lesson-nav-item-dynamic" data-lesson="lesson-1">
                         <span class="nav-number-dynamic">1</span>
                         <span class="nav-title-dynamic">Что такое C++?</span>
                         <button class="open-lesson-btn-dynamic">Открыть</button>
                     </div>
                     
-                    <div class="lesson-nav-item-dynamic" data-lesson="lesson-1">
+                    <div class="lesson-nav-item-dynamic" data-lesson="lesson-1-2">
                         <span class="nav-number-dynamic">2</span>
                         <span class="nav-title-dynamic">Первая программа в Visual Studio</span>
                         <button class="open-lesson-btn-dynamic">Открыть</button>
@@ -113,19 +113,35 @@
 
         // Функция показа контента урока
         function showLessonContent(lessonId) {
-            const lessonContent = document.getElementById('lessonContent');
-            
-            if (firebaseLessonsContent[lessonId]) {
-                const lesson = firebaseLessonsContent[lessonId];
-                lessonContent.innerHTML = `
-                    <div class="lesson-detail-content">
-                        ${lesson.content}
-                    </div>
-                `;
-            } else {
-                showError(`Контент урока ${lessonId} не загружен. Доступные уроки: ${Object.keys(firebaseLessonsContent).join(', ')}`);
-            }
+    const lessonContent = document.getElementById('lessonContent');
+    
+    if (firebaseLessonsContent[lessonId]) {
+        const lesson = firebaseLessonsContent[lessonId];
+        
+        // Извлекаем только содержимое body
+        let cleanContent = lesson.content;
+        
+        // Удаляем внешние теги если они есть
+        const bodyMatch = lesson.content.match(/<body[^>]*>([\s\S]*?)<\/body>/i);
+        if (bodyMatch && bodyMatch[1]) {
+            cleanContent = bodyMatch[1];
         }
+        
+        // Также удаляем возможные style теги, оставшиеся в контенте
+        cleanContent = cleanContent.replace(/<style[^>]*>[\s\S]*?<\/style>/gi, '');
+        
+        lessonContent.innerHTML = `
+            <div class="lesson-detail-content">
+                ${cleanContent}
+                <div class="lesson-meta">
+                    <small>првет загружен из базы данных</small>
+                </div>
+            </div>
+        `;
+    } else {
+        showError(`Контент урока ${lessonId} не загружен.`);
+    }
+}
 
         // Показ ошибки
         function showError(message) {
